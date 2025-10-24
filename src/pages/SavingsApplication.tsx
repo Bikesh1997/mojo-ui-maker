@@ -167,11 +167,28 @@ const SavingsApplication = () => {
     // Handle form submission
   };
 
-  const getValidationClassName = (fieldName: any) => {
+  const getValidationClassName = (fieldName: any, isTyping?: boolean) => {
     const fieldState = form.getFieldState(fieldName);
-    if (fieldState.error && fieldState.isDirty) {
-      return "border-[#D32F2F] focus-visible:ring-[#D32F2F]";
+    const value = form.getValues(fieldName);
+    
+    // While typing (real-time)
+    if (isTyping && value) {
+      if (fieldState.error) {
+        return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
+      }
+      return "border-[#00CC66] focus-visible:ring-[#00CC66] bg-white";
     }
+    
+    // After blur or when filled
+    if (fieldState.error && fieldState.isDirty) {
+      return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
+    }
+    
+    // Validated and filled
+    if (value && !fieldState.error) {
+      return "bg-white border-input";
+    }
+    
     return "";
   };
 
@@ -223,14 +240,15 @@ const SavingsApplication = () => {
                         type="tel"
                         placeholder="Aadhaar linked mobile"
                         className={cn(
-                          "rounded-xl transition-colors border-input",
+                          "rounded-xl transition-colors",
                           field.value && "text-black",
-                          getValidationClassName("mobile")
+                          getValidationClassName("mobile", true)
                         )}
                         maxLength={10}
                         onChange={(e) => {
                           const value = e.target.value.replace(/\D/g, '');
                           field.onChange(value);
+                          form.trigger("mobile");
                         }}
                       />
                     </FormControl>
@@ -291,10 +309,14 @@ const SavingsApplication = () => {
                         type="email"
                         placeholder="Email Address"
                         className={cn(
-                          "rounded-xl transition-colors border-input",
+                          "rounded-xl transition-colors",
                           field.value && "text-black",
-                          getValidationClassName("email")
+                          getValidationClassName("email", true)
                         )}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          form.trigger("email");
+                        }}
                       />
                     </FormControl>
                     <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
@@ -313,14 +335,15 @@ const SavingsApplication = () => {
                         type="text"
                         placeholder="Permanent account number (PAN)"
                         className={cn(
-                          "rounded-xl transition-colors border-input",
+                          "rounded-xl transition-colors",
                           field.value && "text-black",
-                          getValidationClassName("pan")
+                          getValidationClassName("pan", true)
                         )}
                         maxLength={10}
                         onChange={(e) => {
                           const value = e.target.value.toUpperCase();
                           field.onChange(value);
+                          form.trigger("pan");
                         }}
                       />
                     </FormControl>
@@ -341,14 +364,15 @@ const SavingsApplication = () => {
                           type="text"
                           placeholder="12 digit Aadhaar number"
                           className={cn(
-                            "rounded-xl pr-10 transition-colors border-input",
+                            "rounded-xl pr-10 transition-colors",
                             field.value && "text-black",
-                            getValidationClassName("aadhaar")
+                            getValidationClassName("aadhaar", true)
                           )}
                           maxLength={12}
                           onChange={(e) => {
                             const value = e.target.value.replace(/\D/g, '');
                             field.onChange(value);
+                            form.trigger("aadhaar");
                           }}
                         />
                         <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -369,7 +393,12 @@ const SavingsApplication = () => {
                   name="otp"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm text-foreground">Verify OTP</FormLabel>
+                      <FormLabel className={cn(
+                        "text-sm transition-colors",
+                        otpVerified ? "text-[#00CC66]" : "text-foreground"
+                      )}>
+                        {otpVerified ? "Verified" : "Verify OTP"}
+                      </FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input
@@ -377,9 +406,12 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="enter OTP"
                             className={cn(
-                              "rounded-xl pr-10 transition-colors border-input",
+                              "rounded-xl pr-10 transition-colors",
                               field.value && "text-black",
-                              otpError && "border-[#D32F2F] focus-visible:ring-[#D32F2F]"
+                              field.value?.length === 6 && !otpError && !otpVerified && "border-[#00CC66] bg-white",
+                              field.value && field.value.length < 6 && "border-[#FF0000] bg-white",
+                              otpError && "border-[#FF0000]",
+                              otpVerified && "bg-white border-input"
                             )}
                             maxLength={6}
                             autoComplete="one-time-code"
@@ -389,6 +421,7 @@ const SavingsApplication = () => {
                               field.onChange(value);
                               setEnteredOtp(value);
                               setOtpError(false);
+                              setOtpVerified(false);
                             }}
                           />
                           {otpVerified && (
@@ -398,17 +431,17 @@ const SavingsApplication = () => {
                           )}
                         </div>
                       </FormControl>
+                      {otpError && (
+                        <p className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200">
+                          Invalid OTP, please try again
+                        </p>
+                      )}
                       <div className="flex justify-between items-center mt-2">
                         <span className="text-xs text-muted-foreground">Timer: {formatTime(otpTimer)}</span>
                         <button type="button" className="text-xs text-secondary font-medium" disabled={otpTimer > 0}>
                           Resend OTP
                         </button>
                       </div>
-                      {otpError && (
-                        <p className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200">
-                          Invalid OTP, please try again.
-                        </p>
-                      )}
                     </FormItem>
                   )}
                 />
@@ -544,13 +577,14 @@ const SavingsApplication = () => {
                         type="text"
                         placeholder="Annual Income in Rupees"
                         className={cn(
-                          "rounded-xl transition-colors border-input",
+                          "rounded-xl transition-colors",
                           field.value && "text-black",
-                          getValidationClassName("annualIncome")
+                          getValidationClassName("annualIncome", true)
                         )}
                         onChange={(e) => {
                           const formatted = formatCurrency(e.target.value);
                           field.onChange(formatted);
+                          form.trigger("annualIncome");
                         }}
                       />
                     </FormControl>
@@ -570,10 +604,14 @@ const SavingsApplication = () => {
                         type="text"
                         placeholder="Mothers Full Name"
                         className={cn(
-                          "rounded-xl transition-colors border-input",
+                          "rounded-xl transition-colors",
                           field.value && "text-black",
-                          getValidationClassName("motherName")
+                          getValidationClassName("motherName", true)
                         )}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          form.trigger("motherName");
+                        }}
                       />
                     </FormControl>
                     <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
@@ -743,10 +781,14 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="Nominee Full Name"
                             className={cn(
-                              "rounded-xl transition-colors border-input",
+                              "rounded-xl transition-colors",
                               field.value && "text-black",
-                              getValidationClassName("nomineeFullName")
+                              getValidationClassName("nomineeFullName", true)
                             )}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              form.trigger("nomineeFullName");
+                            }}
                           />
                         </FormControl>
                         <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
@@ -765,10 +807,14 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="Relationship with Customer"
                             className={cn(
-                              "rounded-xl transition-colors border-input",
+                              "rounded-xl transition-colors",
                               field.value && "text-black",
-                              getValidationClassName("nomineeRelationship")
+                              getValidationClassName("nomineeRelationship", true)
                             )}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              form.trigger("nomineeRelationship");
+                            }}
                           />
                         </FormControl>
                         <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
@@ -828,14 +874,15 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="Aadhaar Number"
                             className={cn(
-                              "rounded-xl transition-colors border-input",
+                              "rounded-xl transition-colors",
                               field.value && "text-black",
-                              getValidationClassName("nomineeAadhaar")
+                              getValidationClassName("nomineeAadhaar", true)
                             )}
                             maxLength={12}
                             onChange={(e) => {
                               const value = e.target.value.replace(/\D/g, '');
                               field.onChange(value);
+                              form.trigger("nomineeAadhaar");
                             }}
                           />
                         </FormControl>
@@ -855,10 +902,14 @@ const SavingsApplication = () => {
                             type="email"
                             placeholder="Email Address"
                             className={cn(
-                              "rounded-xl transition-colors border-input",
+                              "rounded-xl transition-colors",
                               field.value && "text-black",
-                              getValidationClassName("nomineeEmail")
+                              getValidationClassName("nomineeEmail", true)
                             )}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              form.trigger("nomineeEmail");
+                            }}
                           />
                         </FormControl>
                         <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
