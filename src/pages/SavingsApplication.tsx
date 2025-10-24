@@ -155,9 +155,10 @@ const SavingsApplication = () => {
 
   const getValidationClassName = (fieldName: any) => {
     const fieldState = form.getFieldState(fieldName);
-    if (!fieldState.isDirty) return "";
-    if (fieldState.error) return "border-[#D32F2F] focus-visible:ring-[#D32F2F]";
-    return "border-[#28A745] focus-visible:ring-[#28A745]";
+    if (fieldState.error && fieldState.isDirty) {
+      return "border-[#D32F2F] focus-visible:ring-[#D32F2F]";
+    }
+    return "";
   };
 
   return (
