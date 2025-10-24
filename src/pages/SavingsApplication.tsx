@@ -176,20 +176,23 @@ const SavingsApplication = () => {
       if (fieldState.error) {
         return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
       }
-      return "border-[#00CC66] focus-visible:ring-[#00CC66] bg-white";
+      // Show green while typing valid input
+      if (!fieldState.error && fieldState.isDirty) {
+        return "border-[#00CC66] focus-visible:ring-[#00CC66] bg-white";
+      }
     }
     
-    // After blur or when filled
+    // Show red for errors
     if (fieldState.error && fieldState.isDirty) {
       return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
     }
     
-    // Validated and filled
+    // Default state for validated/filled fields: gray border, white bg, black text
     if (value && !fieldState.error) {
       return "bg-white border-input";
     }
     
-    return "";
+    return "border-input";
   };
 
   return (
