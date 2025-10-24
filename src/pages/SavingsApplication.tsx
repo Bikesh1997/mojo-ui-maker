@@ -268,10 +268,10 @@ const SavingsApplication = () => {
                           <Button
                             variant="outline"
                             className={cn(
-                              "w-full rounded-xl justify-start text-left font-normal transition-colors",
+                              "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-transparent hover:bg-transparent hover:text-foreground",
                               !field.value && "text-muted-foreground",
                               field.value && "text-black",
-                              getValidationClassName("dob")
+                              getValidationClassName("dob", false)
                             )}
                           >
                             {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
@@ -833,10 +833,10 @@ const SavingsApplication = () => {
                               <Button
                                 variant="outline"
                                 className={cn(
-                                  "w-full rounded-xl justify-start text-left font-normal transition-colors",
+                                  "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-transparent hover:bg-transparent hover:text-foreground",
                                   !field.value && "text-muted-foreground",
                                   field.value && "text-black",
-                                  getValidationClassName("nomineeDob")
+                                  getValidationClassName("nomineeDob", false)
                                 )}
                               >
                                 {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
