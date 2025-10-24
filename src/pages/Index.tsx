@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ProductCard } from "@/components/ProductCard";
+import auLogo from "@/assets/au-logo.png";
 import savingsIllustration from "@/assets/savings-illustration.png";
 import creditCardIllustration from "@/assets/creditcard-illustration.png";
 import loanIllustration from "@/assets/loan-illustration.png";
@@ -20,13 +21,7 @@ const Index = () => {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">AU</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs font-semibold text-primary">SMALL</span>
-            <span className="text-xs font-semibold text-primary">FINANCE BANK</span>
-          </div>
+          <img src={auLogo} alt="AU Small Finance Bank" className="h-10" />
         </div>
         <Button variant="secondary" size="sm">Login/Register</Button>
       </header>
