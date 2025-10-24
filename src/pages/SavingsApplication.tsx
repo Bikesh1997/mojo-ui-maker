@@ -7,7 +7,6 @@ import { format, subYears } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FloatingInput } from "@/components/ui/floating-input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -175,22 +174,22 @@ const SavingsApplication = () => {
     // While typing (real-time)
     if (isTyping && value) {
       if (fieldState.error) {
-        return "border-[#FF0000] focus-visible:ring-[#FF0000]";
+        return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
       }
       // Show green while typing valid input
       if (!fieldState.error && fieldState.isDirty) {
-        return "border-[#00CC66] focus-visible:ring-[#00CC66]";
+        return "border-[#00CC66] focus-visible:ring-[#00CC66] bg-white";
       }
     }
     
-    // Show red for errors after blur
+    // Show red for errors
     if (fieldState.error && fieldState.isDirty) {
-      return "border-[#FF0000] focus-visible:ring-[#FF0000]";
+      return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
     }
     
     // Default state for validated/filled fields: gray border, white bg, black text
     if (value && !fieldState.error) {
-      return "border-input";
+      return "bg-white border-input";
     }
     
     return "border-input";
@@ -239,12 +238,13 @@ const SavingsApplication = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <FloatingInput
+                      <Input
                         {...field}
                         type="tel"
-                        label="Aadhaar linked mobile"
+                        placeholder="Aadhaar linked mobile"
                         className={cn(
-                          "transition-all duration-200",
+                          "rounded-xl transition-colors",
+                          field.value && "text-black",
                           getValidationClassName("mobile", true)
                         )}
                         maxLength={10}
@@ -255,7 +255,7 @@ const SavingsApplication = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -268,36 +268,25 @@ const SavingsApplication = () => {
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
-                          <div className="relative">
-                            <Button
-                              variant="outline"
-                              className={cn(
-                                "w-full h-12 rounded-xl justify-start text-left font-normal px-4 pt-5 pb-1 transition-all duration-200 bg-white shadow-sm hover:bg-white",
-                                !field.value && "text-transparent",
-                                field.value && "text-black",
-                                getValidationClassName("dob", false)
-                              )}
-                            >
-                              {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
-                              <Calendar className="ml-auto h-5 w-5 opacity-50" />
-                            </Button>
-                            <label className={cn(
-                              "absolute left-4 text-muted-foreground transition-all duration-200 pointer-events-none",
-                              field.value ? "top-1.5 text-xs font-medium" : "top-3.5 text-sm"
-                            )}>
-                              Date of Birth
-                            </label>
-                          </div>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-transparent hover:bg-transparent hover:text-foreground",
+                              !field.value && "text-muted-foreground",
+                              field.value && "text-black",
+                              getValidationClassName("dob", false)
+                            )}
+                          >
+                            {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
+                            <Calendar className="ml-auto h-5 w-5 opacity-50" />
+                          </Button>
                         </FormControl>
                       </PopoverTrigger>
                       <PopoverContent className="w-auto p-0" align="start">
                         <CalendarComponent
                           mode="single"
                           selected={field.value}
-                          onSelect={(date) => {
-                            field.onChange(date);
-                            form.trigger("dob");
-                          }}
+                          onSelect={field.onChange}
                           disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
                           initialFocus
                           captionLayout="dropdown-buttons"
@@ -307,7 +296,7 @@ const SavingsApplication = () => {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -318,12 +307,13 @@ const SavingsApplication = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <FloatingInput
+                      <Input
                         {...field}
                         type="email"
-                        label="Email Address"
+                        placeholder="Email Address"
                         className={cn(
-                          "transition-all duration-200",
+                          "rounded-xl transition-colors",
+                          field.value && "text-black",
                           getValidationClassName("email", true)
                         )}
                         onChange={(e) => {
@@ -332,7 +322,7 @@ const SavingsApplication = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -343,12 +333,13 @@ const SavingsApplication = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <FloatingInput
+                      <Input
                         {...field}
                         type="text"
-                        label="Permanent account number (PAN)"
+                        placeholder="Permanent account number (PAN)"
                         className={cn(
-                          "transition-all duration-200 uppercase",
+                          "rounded-xl transition-colors",
+                          field.value && "text-black",
                           getValidationClassName("pan", true)
                         )}
                         maxLength={10}
@@ -359,7 +350,7 @@ const SavingsApplication = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -371,12 +362,13 @@ const SavingsApplication = () => {
                   <FormItem>
                     <FormControl>
                       <div className="relative">
-                        <FloatingInput
+                        <Input
                           {...field}
                           type="text"
-                          label="12 digit Aadhaar number"
+                          placeholder="12 digit Aadhaar number"
                           className={cn(
-                            "pr-12 transition-all duration-200",
+                            "rounded-xl pr-10 transition-colors",
+                            field.value && "text-black",
                             getValidationClassName("aadhaar", true)
                           )}
                           maxLength={12}
@@ -386,14 +378,14 @@ const SavingsApplication = () => {
                             form.trigger("aadhaar");
                           }}
                         />
-                        <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2">
+                        <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2">
                           <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
                           </svg>
                         </button>
                       </div>
                     </FormControl>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -405,23 +397,24 @@ const SavingsApplication = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className={cn(
-                        "text-sm font-medium transition-colors",
+                        "text-sm transition-colors",
                         otpVerified ? "text-[#00CC66]" : "text-foreground"
                       )}>
-                        {otpVerified ? "✓ Verified" : "Verify OTP"}
+                        {otpVerified ? "Verified" : "Verify OTP"}
                       </FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <FloatingInput
+                          <Input
                             {...field}
                             type="text"
-                            label="Enter 6-digit OTP"
+                            placeholder="enter OTP"
                             className={cn(
-                              "pr-12 transition-all duration-200",
-                              field.value?.length === 6 && !otpError && !otpVerified && "border-[#00CC66]",
-                              field.value && field.value.length < 6 && field.value.length > 0 && "border-[#FF0000]",
+                              "rounded-xl pr-10 transition-colors",
+                              field.value && "text-black",
+                              field.value?.length === 6 && !otpError && !otpVerified && "border-[#00CC66] bg-white",
+                              field.value && field.value.length < 6 && "border-[#FF0000] bg-white",
                               otpError && "border-[#FF0000]",
-                              otpVerified && "border-input"
+                              otpVerified && "bg-white border-input"
                             )}
                             maxLength={6}
                             autoComplete="one-time-code"
@@ -435,28 +428,20 @@ const SavingsApplication = () => {
                             }}
                           />
                           {otpVerified && (
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#28A745] rounded-full p-1">
+                            <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#28A745] rounded-full p-1">
                               <Check className="w-4 h-4 text-white" />
                             </div>
                           )}
                         </div>
                       </FormControl>
                       {otpError && (
-                        <p className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
-                          Invalid OTP. Please try again.
+                        <p className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200">
+                          Invalid OTP, please try again
                         </p>
                       )}
                       <div className="flex justify-between items-center mt-2">
                         <span className="text-xs text-muted-foreground">Timer: {formatTime(otpTimer)}</span>
-                        <button 
-                          type="button" 
-                          className={cn(
-                            "text-xs font-medium transition-colors",
-                            otpTimer > 0 ? "text-muted-foreground cursor-not-allowed" : "text-secondary hover:text-secondary/80"
-                          )}
-                          disabled={otpTimer > 0}
-                          onClick={otpTimer === 0 ? handleGetOtp : undefined}
-                        >
+                        <button type="button" className="text-xs text-secondary font-medium" disabled={otpTimer > 0}>
                           Resend OTP
                         </button>
                       </div>
@@ -468,7 +453,7 @@ const SavingsApplication = () => {
               <Button 
                 type="button"
                 onClick={showOtpField ? handleVerifyOtp : handleGetOtp}
-                className="w-full rounded-xl h-12 text-base font-semibold shadow-lg transition-all duration-200 hover:shadow-xl active:scale-[0.98]"
+                className="w-full rounded-xl h-12 text-base font-semibold"
                 style={{ backgroundColor: '#EA671C' }}
                 disabled={showOtpField && (!enteredOtp || enteredOtp.length !== 6)}
               >
@@ -590,12 +575,13 @@ const SavingsApplication = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <FloatingInput
+                      <Input
                         {...field}
                         type="text"
-                        label="Annual Income in Rupees"
+                        placeholder="Annual Income in Rupees"
                         className={cn(
-                          "transition-all duration-200",
+                          "rounded-xl transition-colors",
+                          field.value && "text-black",
                           getValidationClassName("annualIncome", true)
                         )}
                         onChange={(e) => {
@@ -605,7 +591,7 @@ const SavingsApplication = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -616,12 +602,13 @@ const SavingsApplication = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <FloatingInput
+                      <Input
                         {...field}
                         type="text"
-                        label="Mother's Full Name"
+                        placeholder="Mothers Full Name"
                         className={cn(
-                          "transition-all duration-200",
+                          "rounded-xl transition-colors",
+                          field.value && "text-black",
                           getValidationClassName("motherName", true)
                         )}
                         onChange={(e) => {
@@ -630,7 +617,7 @@ const SavingsApplication = () => {
                         }}
                       />
                     </FormControl>
-                    <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                    <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
                 )}
               />
@@ -792,12 +779,13 @@ const SavingsApplication = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <FloatingInput
+                          <Input
                             {...field}
                             type="text"
-                            label="Nominee Full Name"
+                            placeholder="Nominee Full Name"
                             className={cn(
-                              "transition-all duration-200",
+                              "rounded-xl transition-colors",
+                              field.value && "text-black",
                               getValidationClassName("nomineeFullName", true)
                             )}
                             onChange={(e) => {
@@ -806,7 +794,7 @@ const SavingsApplication = () => {
                             }}
                           />
                         </FormControl>
-                        <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                        <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                       </FormItem>
                     )}
                   />
@@ -817,12 +805,13 @@ const SavingsApplication = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <FloatingInput
+                          <Input
                             {...field}
                             type="text"
-                            label="Relationship with Customer"
+                            placeholder="Relationship with Customer"
                             className={cn(
-                              "transition-all duration-200",
+                              "rounded-xl transition-colors",
+                              field.value && "text-black",
                               getValidationClassName("nomineeRelationship", true)
                             )}
                             onChange={(e) => {
@@ -831,7 +820,7 @@ const SavingsApplication = () => {
                             }}
                           />
                         </FormControl>
-                        <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                        <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                       </FormItem>
                     )}
                   />
@@ -844,26 +833,18 @@ const SavingsApplication = () => {
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
-                              <div className="relative">
-                                <Button
-                                  variant="outline"
-                                  className={cn(
-                                    "w-full h-12 rounded-xl justify-start text-left font-normal px-4 pt-5 pb-1 transition-all duration-200 bg-white shadow-sm hover:bg-white",
-                                    !field.value && "text-transparent",
-                                    field.value && "text-black",
-                                    getValidationClassName("nomineeDob", false)
-                                  )}
-                                >
-                                  {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
-                                  <Calendar className="ml-auto h-5 w-5 opacity-50" />
-                                </Button>
-                                <label className={cn(
-                                  "absolute left-4 text-muted-foreground transition-all duration-200 pointer-events-none",
-                                  field.value ? "top-1.5 text-xs font-medium" : "top-3.5 text-sm"
-                                )}>
-                                  Nominee Date of Birth
-                                </label>
-                              </div>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-transparent hover:bg-transparent hover:text-foreground",
+                                  !field.value && "text-muted-foreground",
+                                  field.value && "text-black",
+                                  getValidationClassName("nomineeDob", false)
+                                )}
+                              >
+                                {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
+                                <Calendar className="ml-auto h-5 w-5 opacity-50" />
+                              </Button>
                             </FormControl>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
@@ -880,7 +861,7 @@ const SavingsApplication = () => {
                             />
                           </PopoverContent>
                         </Popover>
-                        <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                        <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                       </FormItem>
                     )}
                   />
@@ -891,12 +872,13 @@ const SavingsApplication = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <FloatingInput
+                          <Input
                             {...field}
                             type="text"
-                            label="Aadhaar Number"
+                            placeholder="Aadhaar Number"
                             className={cn(
-                              "transition-all duration-200",
+                              "rounded-xl transition-colors",
+                              field.value && "text-black",
                               getValidationClassName("nomineeAadhaar", true)
                             )}
                             maxLength={12}
@@ -907,7 +889,7 @@ const SavingsApplication = () => {
                             }}
                           />
                         </FormControl>
-                        <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                        <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                       </FormItem>
                     )}
                   />
@@ -918,12 +900,13 @@ const SavingsApplication = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <FloatingInput
+                          <Input
                             {...field}
                             type="email"
-                            label="Email Address"
+                            placeholder="Email Address"
                             className={cn(
-                              "transition-all duration-200",
+                              "rounded-xl transition-colors",
+                              field.value && "text-black",
                               getValidationClassName("nomineeEmail", true)
                             )}
                             onChange={(e) => {
@@ -932,7 +915,7 @@ const SavingsApplication = () => {
                             }}
                           />
                         </FormControl>
-                        <FormMessage className="text-xs text-[#D32F2F] mt-1.5 animate-in fade-in slide-in-from-top-1 duration-200" />
+                        <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                       </FormItem>
                     )}
                   />
