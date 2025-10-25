@@ -28,7 +28,6 @@ import auLogo from "@/assets/au-logo.png";
 import savingsIllustration from "@/assets/savings-illustration.png";
 import creditCardIllustration from "@/assets/creditcard-illustration.png";
 import loanIllustration from "@/assets/loan-illustration.png";
-import lovableIllustration from "@/assets/lovable-illustration.png";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -136,13 +135,6 @@ const Index = () => {
             description="Get loans up to ₹20 lakh approved instantly"
             illustration={loanIllustration}
             gradient="bg-gradient-success"
-          />
-
-          <ProductCard
-            title="Build with Lovable"
-            description="Create stunning web apps with AI-powered development"
-            illustration={lovableIllustration}
-            gradient="bg-gradient-lovable"
           />
         </div>
       </div>
