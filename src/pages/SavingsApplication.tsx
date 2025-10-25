@@ -164,7 +164,8 @@ const SavingsApplication = () => {
 
   const onSubmit = (data: z.infer<typeof baseFormSchema>) => {
     console.log("Form submitted:", data);
-    // Handle form submission
+    // Navigate to Account Details page after successful submission
+    navigate("/account-details");
   };
 
   const getValidationClassName = (fieldName: any, isTyping?: boolean) => {
