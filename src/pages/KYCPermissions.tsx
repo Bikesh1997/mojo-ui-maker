@@ -4,6 +4,13 @@ import { Wifi, Camera, Mic } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import PermissionItem from "@/components/PermissionItem";
 import { usePermissions } from "@/hooks/usePermissions";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const KYCPermissions = () => {
   const navigate = useNavigate();
@@ -24,21 +31,20 @@ const KYCPermissions = () => {
     <div className="min-h-screen bg-background">
       <PageHeader />
 
-      {/* Content */}
-      <div className="px-6 py-6 flex flex-col min-h-[calc(100vh-72px)]">
-        <div className="flex-1">
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold text-foreground mb-2">
+      <Dialog open={true}>
+        <DialogContent className="w-[75%] max-w-md mx-auto p-6 bg-white rounded-3xl shadow-lg">
+          <DialogHeader className="mb-4">
+            <DialogTitle className="text-xl font-bold text-foreground">
               Video KYC Verification
-            </h1>
-            <p className="text-sm text-muted-foreground">
+            </DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground mt-2">
               We need to verify a few permissions before we proceed with your Video KYC.
-            </p>
-          </div>
+            </DialogDescription>
+          </DialogHeader>
 
-          {/* Permissions Card */}
-          <div className="bg-card rounded-3xl p-6 shadow-card">
-            <h2 className="text-base font-semibold text-foreground mb-4">
+          {/* Permissions List */}
+          <div className="mb-4">
+            <h2 className="text-base font-semibold text-foreground mb-3">
               Required Permissions
             </h2>
             
@@ -68,21 +74,21 @@ const KYCPermissions = () => {
           </div>
 
           {!allPermissionsGranted && (
-            <div className="mt-4 p-4 bg-destructive/10 border border-destructive/20 rounded-2xl">
-              <p className="text-sm text-destructive">
+            <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-xl">
+              <p className="text-xs text-destructive">
                 Please grant all required permissions to proceed with Video KYC verification.
               </p>
             </div>
           )}
 
           {/* PAN Card Message */}
-          <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-2xl">
-            <p className="text-sm text-primary font-medium">
+          <div className="p-3 bg-primary/5 border border-primary/20 rounded-xl">
+            <p className="text-xs text-primary font-medium">
               Please keep your PAN Card with you.
             </p>
           </div>
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
