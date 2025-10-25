@@ -41,10 +41,10 @@ const AccountDetails = () => {
         </div>
 
         {/* Account Details Card */}
-        <div className="bg-card rounded-3xl p-6 shadow-card mb-4">
-          <h2 className="text-lg font-semibold text-foreground mb-4">Account Details</h2>
+        <div className="bg-card rounded-2xl p-4 shadow-sm mb-4">
+          <h2 className="text-base font-semibold text-foreground mb-3">Account Details</h2>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <AccountDetailItem 
               label="Customer ID" 
               value={accountDetails.customerId} 

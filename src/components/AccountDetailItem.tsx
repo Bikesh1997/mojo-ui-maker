@@ -7,8 +7,8 @@ interface AccountDetailItemProps {
 const AccountDetailItem = ({ label, value, isBold = true }: AccountDetailItemProps) => {
   return (
     <div>
-      <p className="text-xs text-muted-foreground mb-1">{label}</p>
-      <p className={`text-base ${isBold ? 'font-semibold' : 'font-normal'}`} style={{ color: '#000000' }}>
+      <p className="text-[10px] text-muted-foreground mb-0.5">{label}</p>
+      <p className={`text-sm ${isBold ? 'font-semibold' : 'font-normal'}`} style={{ color: '#000000' }}>
         {value}
       </p>
     </div>
