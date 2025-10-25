@@ -87,6 +87,13 @@ const AccountDetails = () => {
             Your KYC is pending. Complete it using the vKYC option below.
           </p>
         </div>
+
+        {/* Document Prompt Card */}
+        <div className="bg-[#FFF4E6] border border-[#FFB74D] rounded-xl p-4 shadow-sm">
+          <p className="text-sm text-[#E65100] font-medium text-center">
+            Please keep your PAN and Aadhaar card with you for verification
+          </p>
+        </div>
       </div>
 
       {/* Permissions Modal */}
