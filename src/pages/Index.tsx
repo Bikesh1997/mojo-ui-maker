@@ -28,6 +28,7 @@ import auLogo from "@/assets/au-logo.png";
 import savingsIllustration from "@/assets/savings-illustration.png";
 import creditCardIllustration from "@/assets/creditcard-illustration.png";
 import loanIllustration from "@/assets/loan-illustration.png";
+import lovableIllustration from "@/assets/lovable-illustration.png";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -67,6 +68,52 @@ const Index = () => {
           </Select>
         </div>
 
+        {/* Top Feature Cards */}
+        <div className="mb-6">
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard 
+              title="Savings Account" 
+              icon={Wallet}
+              onApply={() => navigate("/savings-application")}
+            />
+            <FeatureCard title="Credit Card" icon={CreditCard} />
+          </div>
+        </div>
+
+        {/* Two Cards in Row */}
+        <div className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">Quick Services</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Quick Apply" icon={CheckCircle} />
+            <FeatureCard title="Zero Balance" icon={Landmark} />
+          </div>
+        </div>
+
+        {/* Additional Feature Cards */}
+        <div className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">Banking Services</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Current Account" icon={Building2} />
+            <FeatureCard title="Fixed Deposit" icon={Landmark} />
+            <FeatureCard title="Car Loan" icon={Car} />
+            <FeatureCard title="Bill Pay" icon={FileText} />
+          </div>
+        </div>
+
+        {/* More Services */}
+        <div className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">More Services</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Offers" icon={Gift} />
+            <FeatureCard title="Recharge" icon={Smartphone} />
+            <FeatureCard title="Bus" icon={Bus} />
+            <FeatureCard title="Hotels" icon={Hotel} />
+            <FeatureCard title="Flights" icon={Plane} />
+            <FeatureCard title="Apply Now" icon={CheckCircle} />
+          </div>
+        </div>
+
+
         {/* Product Cards */}
         <div className="space-y-4">
           <ProductCard
@@ -89,6 +136,13 @@ const Index = () => {
             description="Get loans up to ₹20 lakh approved instantly"
             illustration={loanIllustration}
             gradient="bg-gradient-success"
+          />
+
+          <ProductCard
+            title="Build with Lovable"
+            description="Create stunning web apps with AI-powered development"
+            illustration={lovableIllustration}
+            gradient="bg-gradient-lovable"
           />
         </div>
       </div>
