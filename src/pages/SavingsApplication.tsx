@@ -176,9 +176,9 @@ const SavingsApplication = () => {
     // While typing (real-time)
     if (isTyping && value) {
       if (fieldState.error) {
-        return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
+        return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-background";
       }
-      // Show green while typing valid input
+      // Show white background and green border while typing valid input
       if (!fieldState.error && fieldState.isDirty) {
         return "border-[#00CC66] focus-visible:ring-[#00CC66] bg-white";
       }
@@ -186,15 +186,16 @@ const SavingsApplication = () => {
     
     // Show red for errors
     if (fieldState.error && fieldState.isDirty) {
-      return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-white";
+      return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-background";
     }
     
-    // Default state for validated/filled fields: gray border, white bg, black text
+    // White background for correctly filled fields
     if (value && !fieldState.error) {
       return "bg-white border-input";
     }
     
-    return "border-input";
+    // Default neutral background
+    return "border-input bg-background";
   };
 
   return (
