@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import auLogo from "@/assets/au-logo.png";
+import bankRepresentative from "@/assets/bank-representative.jpg";
 import { useState, useEffect } from "react";
 
 const AccountDetails = () => {
@@ -68,7 +69,14 @@ const AccountDetails = () => {
           <div className="text-2xl font-bold text-primary mb-4">
             {formatTimer(timer)}
           </div>
-          <p className="text-sm text-muted-foreground">Connecting...</p>
+          <p className="text-sm text-muted-foreground mb-4">Connecting...</p>
+          <div className="flex justify-center">
+            <img 
+              src={bankRepresentative} 
+              alt="Bank Representative" 
+              className="w-32 h-32 rounded-full border-4 border-primary object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>
