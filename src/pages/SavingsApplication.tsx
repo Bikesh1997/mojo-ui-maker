@@ -90,6 +90,7 @@ const SavingsApplication = () => {
   const [otpVerified, setOtpVerified] = useState(false);
   const [otpError, setOtpError] = useState(false);
   const [enteredOtp, setEnteredOtp] = useState("");
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const form = useForm<z.infer<typeof baseFormSchema>>({
     resolver: zodResolver(baseFormSchema),
@@ -239,22 +240,25 @@ const SavingsApplication = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="tel"
-                        placeholder="Aadhaar linked mobile"
-                        className={cn(
-                          "rounded-xl transition-colors",
-                          field.value && "text-black",
-                          getValidationClassName("mobile", true)
-                        )}
-                        maxLength={10}
-                        onChange={(e) => {
-                          const value = e.target.value.replace(/\D/g, '');
-                          field.onChange(value);
-                          form.trigger("mobile");
-                        }}
-                      />
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-black font-medium">+91</span>
+                        <Input
+                          {...field}
+                          type="tel"
+                          placeholder="Aadhaar linked mobile"
+                          className={cn(
+                            "rounded-xl transition-colors pl-12",
+                            field.value && "text-black",
+                            getValidationClassName("mobile", true)
+                          )}
+                          maxLength={10}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\D/g, '');
+                            field.onChange(value);
+                            form.trigger("mobile");
+                          }}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200" />
                   </FormItem>
@@ -266,7 +270,7 @@ const SavingsApplication = () => {
                 name="dob"
                 render={({ field }) => (
                   <FormItem>
-                    <Popover>
+                    <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
@@ -287,12 +291,15 @@ const SavingsApplication = () => {
                         <CalendarComponent
                           mode="single"
                           selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                          onSelect={(date) => {
+                            field.onChange(date);
+                            setCalendarOpen(false);
+                          }}
+                          disabled={(date) => date > subYears(new Date(), 18) || date < new Date("1900-01-01")}
                           initialFocus
                           captionLayout="dropdown-buttons"
                           fromYear={1900}
-                          toYear={new Date().getFullYear()}
+                          toYear={subYears(new Date(), 18).getFullYear()}
                           className="pointer-events-auto"
                         />
                       </PopoverContent>
@@ -344,6 +351,10 @@ const SavingsApplication = () => {
                           getValidationClassName("pan", true)
                         )}
                         maxLength={10}
+                        inputMode={
+                          field.value.length < 5 ? "text" :
+                          field.value.length < 9 ? "numeric" : "text"
+                        }
                         onChange={(e) => {
                           const value = e.target.value.toUpperCase();
                           field.onChange(value);
@@ -366,6 +377,7 @@ const SavingsApplication = () => {
                         <Input
                           {...field}
                           type="text"
+                          inputMode="numeric"
                           placeholder="12 digit Aadhaar number"
                           className={cn(
                             "rounded-xl pr-10 transition-colors",
@@ -477,14 +489,21 @@ const SavingsApplication = () => {
                         <Checkbox 
                           checked={field.value}
                           onCheckedChange={field.onChange}
+                          disabled={!otpVerified}
                         />
                       </FormControl>
-                      <Label className="text-sm font-medium leading-tight">
+                      <Label className={cn(
+                        "text-sm font-medium leading-tight",
+                        !otpVerified && "opacity-50"
+                      )}>
                         Same as my Aadhaar Address
                       </Label>
                     </div>
                     
-                    <div className="rounded-xl p-4 text-sm text-foreground" style={{ backgroundColor: '#6C256C1F' }}>
+                    <div className={cn(
+                      "rounded-xl p-4 text-sm text-foreground",
+                      !otpVerified && "opacity-50"
+                    )} style={{ backgroundColor: '#6C256C1F' }}>
                       Cerebrum IT Park, Office No 4C, 3rd Floor, B-3 Tower, Kalyani Nagar, Pune, Maharashtra 411014
                     </div>
                   </div>

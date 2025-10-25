@@ -11,8 +11,8 @@ const AccountDetails = () => {
   // Mock account details - in a real app, this would come from the API/state
   const accountDetails = {
     customerId: "AUSF9876543210",
-    accountNumber: "1234567890123456",
-    ifscCode: "AUBL0002345",
+    accountNumber: "123456789012",
+    ifscCode: "AUBL00234",
     avgMonthlyBalance: "₹10,000",
     branchName: "Connaught Place Branch",
     branchAddress: "12, Connaught Place, New Delhi - 110001",
@@ -41,10 +41,10 @@ const AccountDetails = () => {
         </div>
 
         {/* Account Details Card */}
-        <div className="bg-card rounded-3xl p-6 shadow-card mb-6">
+        <div className="bg-card rounded-3xl p-6 shadow-card mb-4">
           <h2 className="text-lg font-semibold text-foreground mb-4">Account Details</h2>
           
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
             <AccountDetailItem 
               label="Customer ID" 
               value={accountDetails.customerId} 
@@ -61,16 +61,27 @@ const AccountDetails = () => {
               label="Average Monthly Balance" 
               value={accountDetails.avgMonthlyBalance} 
             />
-            <AccountDetailItem 
-              label="Branch Name" 
-              value={accountDetails.branchName} 
-            />
-            <AccountDetailItem 
-              label="Branch Address" 
-              value={accountDetails.branchAddress}
-              isBold={false}
-            />
+            <div className="col-span-2">
+              <AccountDetailItem 
+                label="Branch Name" 
+                value={accountDetails.branchName} 
+              />
+            </div>
+            <div className="col-span-2">
+              <AccountDetailItem 
+                label="Branch Address" 
+                value={accountDetails.branchAddress}
+                isBold={false}
+              />
+            </div>
           </div>
+        </div>
+
+        {/* Delivery Info */}
+        <div className="mb-4 p-4 bg-[#28A745]/10 border border-[#28A745]/20 rounded-2xl">
+          <p className="text-sm text-[#28A745] font-medium">
+            Your Cheque Book and Debit Card will be delivered to the verified address.
+          </p>
         </div>
 
         {/* KYC Info Banner */}
@@ -79,8 +90,8 @@ const AccountDetails = () => {
         {/* CTA Button */}
         <Button
           onClick={() => navigate("/kyc-permissions")}
-          className="w-full h-12 text-base font-semibold"
-          variant="default"
+          className="w-full h-12 text-base font-semibold rounded-xl"
+          variant="secondary"
         >
           Complete KYC
         </Button>

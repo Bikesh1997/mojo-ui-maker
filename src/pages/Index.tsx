@@ -50,6 +50,24 @@ const Index = () => {
           </Select>
         </div>
 
+        {/* Two Cards in Row */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <div 
+            className="p-4 rounded-2xl shadow-sm"
+            style={{ background: 'linear-gradient(260deg, rgba(234, 103, 28, 0.12) 9.28%, rgba(108, 37, 108, 0.12) 94.59%)' }}
+          >
+            <h3 className="text-sm font-semibold text-foreground mb-1">Quick Apply</h3>
+            <p className="text-xs text-muted-foreground">Instant account opening</p>
+          </div>
+          <div 
+            className="p-4 rounded-2xl shadow-sm"
+            style={{ background: 'linear-gradient(260deg, rgba(234, 103, 28, 0.12) 9.28%, rgba(108, 37, 108, 0.12) 94.59%)' }}
+          >
+            <h3 className="text-sm font-semibold text-foreground mb-1">Zero Balance</h3>
+            <p className="text-xs text-muted-foreground">No minimum balance</p>
+          </div>
+        </div>
+
         {/* Product Cards */}
         <div className="space-y-4">
           <ProductCard

@@ -15,6 +15,11 @@ const KYCPermissions = () => {
     }
   };
 
+  // Auto-start video KYC when all permissions are granted
+  if (allPermissionsGranted) {
+    navigate("/kyc-verification");
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <PageHeader />
@@ -69,18 +74,13 @@ const KYCPermissions = () => {
               </p>
             </div>
           )}
-        </div>
 
-        {/* CTA Button */}
-        <div className="pt-6">
-          <Button
-            onClick={handleStartKYC}
-            disabled={!allPermissionsGranted}
-            className="w-full h-12 text-base font-semibold rounded-xl"
-            variant="secondary"
-          >
-            {allPermissionsGranted ? "Start Video KYC" : "Grant Permissions"}
-          </Button>
+          {/* PAN Card Message */}
+          <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-2xl">
+            <p className="text-sm text-primary font-medium">
+              Please keep your PAN Card with you.
+            </p>
+          </div>
         </div>
       </div>
     </div>
