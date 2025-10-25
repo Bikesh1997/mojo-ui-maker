@@ -10,21 +10,22 @@ interface FeatureCardProps {
 export const FeatureCard = ({ title, icon: Icon, onApply }: FeatureCardProps) => {
   return (
     <div 
-      className="p-4 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md"
+      className="p-6 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md"
       style={{ background: 'linear-gradient(260deg, rgba(234, 103, 28, 0.12) 9.28%, rgba(108, 37, 108, 0.12) 94.59%)' }}
     >
-      <div className="flex flex-col items-center gap-3">
-        <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center">
-          <Icon className="w-6 h-6 text-primary" />
+      <div className="flex items-center gap-4">
+        <div className="w-14 h-14 rounded-full bg-white/60 flex items-center justify-center flex-shrink-0">
+          <Icon className="w-7 h-7 text-primary" />
         </div>
-        <h3 className="text-sm font-semibold text-foreground text-center">{title}</h3>
-        <Button 
-          className="w-full h-8 text-xs rounded-lg bg-white hover:bg-white/90 shadow-sm hover:shadow-md transition-all duration-200"
-          style={{ color: '#000000' }}
-          onClick={onApply}
-        >
-          Open Account
-        </Button>
+        <div className="flex-1">
+          <h3 className="text-base font-semibold text-foreground mb-3">{title}</h3>
+          <Button 
+            className="w-full h-9 text-sm rounded-lg bg-white hover:bg-white/90 text-black shadow-sm hover:shadow-md transition-all duration-200"
+            onClick={onApply}
+          >
+            Open Account
+          </Button>
+        </div>
       </div>
     </div>
   );
