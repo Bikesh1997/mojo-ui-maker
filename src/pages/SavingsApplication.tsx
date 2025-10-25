@@ -617,8 +617,11 @@ const SavingsApplication = () => {
                     </div>
                     
                     {otpVerified && (
-                      <div className="mt-3 rounded-xl p-4 text-sm bg-[#E8F5E9] text-[#2E7D32] animate-fade-in">
-                        Your checkbook and debit card will be sent to the current address
+                      <div className="mt-3 rounded-xl p-4 bg-[#0D9488] text-white animate-fade-in">
+                        <div className="font-semibold text-sm mb-1">Important</div>
+                        <div className="text-sm">
+                          Your Cheque Book and Debit Card will be sent to your current address
+                        </div>
                       </div>
                     )}
                   </div>
