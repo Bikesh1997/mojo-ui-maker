@@ -67,14 +67,14 @@ const KYCVerification = () => {
         {!verificationComplete ? (
           <div className="flex-1 flex flex-col items-center justify-center">
             {/* PAN Card Message */}
-            <div className="mb-4 p-4 bg-primary/5 border border-primary/20 rounded-2xl max-w-md w-full">
+            <div className="mb-4 p-4 bg-primary/5 border border-primary/20 rounded-2xl w-[75%] max-w-md">
               <p className="text-sm text-primary font-medium text-center">
                 Please keep your PAN Card with you while we complete your KYC.
               </p>
             </div>
 
             {/* Camera View */}
-            <div className="w-full max-w-md">
+            <div className="w-[75%] max-w-md">
               <div className="relative w-full aspect-[3/4] bg-black rounded-3xl overflow-hidden shadow-card">
                 <video
                   ref={videoRef}
@@ -107,7 +107,7 @@ const KYCVerification = () => {
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center text-center max-w-md mx-auto">
+          <div className="flex-1 flex flex-col items-center justify-center text-center w-[75%] max-w-md mx-auto">
             <div className="w-24 h-24 mx-auto mb-6 bg-success/10 rounded-full flex items-center justify-center">
               <CheckCircle2 className="w-12 h-12 text-success" />
             </div>
