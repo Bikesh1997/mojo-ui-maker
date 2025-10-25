@@ -67,52 +67,6 @@ const Index = () => {
           </Select>
         </div>
 
-        {/* Top Feature Cards */}
-        <div className="mb-6">
-          <div className="grid grid-cols-2 gap-3">
-            <FeatureCard 
-              title="Savings Account" 
-              icon={Wallet}
-              onApply={() => navigate("/savings-application")}
-            />
-            <FeatureCard title="Credit Card" icon={CreditCard} />
-          </div>
-        </div>
-
-        {/* Two Cards in Row */}
-        <div className="mb-6">
-          <h2 className="text-base font-semibold text-foreground mb-3">Quick Services</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <FeatureCard title="Quick Apply" icon={CheckCircle} />
-            <FeatureCard title="Zero Balance" icon={Landmark} />
-          </div>
-        </div>
-
-        {/* Additional Feature Cards */}
-        <div className="mb-6">
-          <h2 className="text-base font-semibold text-foreground mb-3">Banking Services</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <FeatureCard title="Current Account" icon={Building2} />
-            <FeatureCard title="Fixed Deposit" icon={Landmark} />
-            <FeatureCard title="Car Loan" icon={Car} />
-            <FeatureCard title="Bill Pay" icon={FileText} />
-          </div>
-        </div>
-
-        {/* More Services */}
-        <div className="mb-6">
-          <h2 className="text-base font-semibold text-foreground mb-3">More Services</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <FeatureCard title="Offers" icon={Gift} />
-            <FeatureCard title="Recharge" icon={Smartphone} />
-            <FeatureCard title="Bus" icon={Bus} />
-            <FeatureCard title="Hotels" icon={Hotel} />
-            <FeatureCard title="Flights" icon={Plane} />
-            <FeatureCard title="Apply Now" icon={CheckCircle} />
-          </div>
-        </div>
-
-
         {/* Product Cards */}
         <div className="space-y-4">
           <ProductCard
