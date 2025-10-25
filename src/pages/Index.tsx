@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -29,6 +30,7 @@ import creditCardIllustration from "@/assets/creditcard-illustration.png";
 import loanIllustration from "@/assets/loan-illustration.png";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState("savings");
 
   return (
@@ -68,7 +70,11 @@ const Index = () => {
         {/* Top Feature Cards */}
         <div className="mb-6">
           <div className="grid grid-cols-2 gap-3">
-            <FeatureCard title="Savings Account" icon={Wallet} />
+            <FeatureCard 
+              title="Savings Account" 
+              icon={Wallet}
+              onApply={() => navigate("/savings-application")}
+            />
             <FeatureCard title="Credit Card" icon={CreditCard} />
           </div>
         </div>
