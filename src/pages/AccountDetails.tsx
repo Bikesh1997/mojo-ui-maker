@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Info } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import auLogo from "@/assets/au-logo.png";
+import AccountDetailItem from "@/components/AccountDetailItem";
+import KycBanner from "@/components/KycBanner";
 
 const AccountDetails = () => {
   const navigate = useNavigate();
@@ -43,50 +45,36 @@ const AccountDetails = () => {
           <h2 className="text-lg font-semibold text-foreground mb-4">Account Details</h2>
           
           <div className="space-y-4">
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">Customer ID</p>
-              <p className="text-base font-semibold text-foreground">{accountDetails.customerId}</p>
-            </div>
-
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">Account Number</p>
-              <p className="text-base font-semibold text-foreground">{accountDetails.accountNumber}</p>
-            </div>
-
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">IFSC Code</p>
-              <p className="text-base font-semibold text-foreground">{accountDetails.ifscCode}</p>
-            </div>
-
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">Average Monthly Balance</p>
-              <p className="text-base font-semibold text-foreground">{accountDetails.avgMonthlyBalance}</p>
-            </div>
-
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">Branch Name</p>
-              <p className="text-base font-semibold text-foreground">{accountDetails.branchName}</p>
-            </div>
-
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">Branch Address</p>
-              <p className="text-base font-normal text-foreground">{accountDetails.branchAddress}</p>
-            </div>
+            <AccountDetailItem 
+              label="Customer ID" 
+              value={accountDetails.customerId} 
+            />
+            <AccountDetailItem 
+              label="Account Number" 
+              value={accountDetails.accountNumber} 
+            />
+            <AccountDetailItem 
+              label="IFSC Code" 
+              value={accountDetails.ifscCode} 
+            />
+            <AccountDetailItem 
+              label="Average Monthly Balance" 
+              value={accountDetails.avgMonthlyBalance} 
+            />
+            <AccountDetailItem 
+              label="Branch Name" 
+              value={accountDetails.branchName} 
+            />
+            <AccountDetailItem 
+              label="Branch Address" 
+              value={accountDetails.branchAddress}
+              isBold={false}
+            />
           </div>
         </div>
 
         {/* KYC Info Banner */}
-        <div className="bg-accent/10 border border-accent/20 rounded-2xl p-4 mb-6 flex gap-3">
-          <Info className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm font-medium text-foreground mb-1">
-              Complete your KYC within 30 days
-            </p>
-            <p className="text-xs text-muted-foreground">
-              To activate full account access and unlock all banking features, please complete your Video KYC verification.
-            </p>
-          </div>
-        </div>
+        <KycBanner />
 
         {/* CTA Button */}
         <Button
