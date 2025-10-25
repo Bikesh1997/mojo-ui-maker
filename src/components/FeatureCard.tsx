@@ -21,16 +21,16 @@ export const FeatureCard = ({ title, description, icon: Icon, onApply }: Feature
         <div className="flex-1">
           <h3 className="text-base font-semibold text-foreground mb-1">{title}</h3>
           <p className="text-sm text-foreground/70 mb-3">{description}</p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full">
             <Button 
-              className="flex-1 h-9 text-sm rounded-lg bg-white hover:bg-white/90 text-black shadow-sm hover:shadow-md transition-all duration-200"
+              className="flex-1 min-w-0 h-9 text-xs rounded-lg bg-white hover:bg-white/90 text-black shadow-sm hover:shadow-md transition-all duration-200"
               onClick={onApply}
             >
               Open Account
             </Button>
             <Button 
               variant="outline"
-              className="flex-1 h-9 text-sm rounded-lg border-foreground/20 text-foreground hover:bg-foreground/5 shadow-sm transition-all duration-200"
+              className="flex-1 min-w-0 h-9 text-xs rounded-lg border-foreground/20 text-foreground hover:bg-foreground/5 shadow-sm transition-all duration-200"
             >
               Know More
             </Button>
