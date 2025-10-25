@@ -69,7 +69,7 @@ const KYCVerification = () => {
             {/* PAN Card Message */}
             <div className="mb-4 p-4 bg-primary/5 border border-primary/20 rounded-2xl max-w-md w-full">
               <p className="text-sm text-primary font-medium text-center">
-                Please keep your PAN Card with you.
+                Please keep your PAN Card with you while we complete your KYC.
               </p>
             </div>
 
