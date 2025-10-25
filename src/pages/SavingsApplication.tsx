@@ -605,6 +605,13 @@ const SavingsApplication = () => {
                     )} style={{ backgroundColor: '#6C256C1F' }}>
                       Cerebrum IT Park, Office No 4C, 3rd Floor, B-3 Tower, Kalyani Nagar, Pune, Maharashtra 411014
                     </div>
+                    
+                    <div className={cn(
+                      "mt-3 text-sm text-muted-foreground",
+                      !otpVerified && "opacity-50"
+                    )}>
+                      Your checkbook and debit card will be sent to the current address
+                    </div>
                   </div>
                 </FormItem>
               )}
