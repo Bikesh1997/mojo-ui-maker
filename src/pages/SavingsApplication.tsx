@@ -277,7 +277,7 @@ const SavingsApplication = () => {
                           <Button
                             variant="outline"
                             className={cn(
-                              "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-transparent hover:bg-transparent hover:text-foreground",
+                              "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-white hover:bg-white hover:text-foreground",
                               !field.value && "text-muted-foreground",
                               field.value && "text-black",
                               getValidationClassName("dob", false)
