@@ -6,15 +6,20 @@ import { useState, useEffect } from "react";
 
 const AccountDetails = () => {
   const navigate = useNavigate();
-  const [timer, setTimer] = useState(0);
+  const [timer, setTimer] = useState(30);
 
   useEffect(() => {
+    if (timer <= 0) {
+      navigate("/kyc-permissions");
+      return;
+    }
+
     const interval = setInterval(() => {
-      setTimer((prev) => prev + 1);
+      setTimer((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timer, navigate]);
 
   const formatTimer = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -35,38 +40,24 @@ const AccountDetails = () => {
       {/* Content */}
       <div className="px-6 py-6 space-y-4">
         {/* Success Card */}
-        <div className="bg-card rounded-xl p-6 shadow-sm">
-          <h1 className="text-2xl font-bold text-foreground mb-2">
+        <div className="bg-primary rounded-xl p-6 shadow-sm">
+          <h1 className="text-2xl font-bold text-white mb-2">
             Congratulations!
           </h1>
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-sm text-white/90 mb-4">
             Your savings account has been opened
           </p>
           
           <div className="space-y-3">
             <div>
-              <p className="text-xs text-muted-foreground mb-1">Customer ID</p>
-              <p className="text-base font-semibold text-foreground">563387272</p>
+              <p className="text-xs text-white/80 mb-1">Customer ID</p>
+              <p className="text-base font-semibold text-white">563387272</p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground mb-1">Account Number</p>
-              <p className="text-base font-semibold text-foreground">123465789654</p>
+              <p className="text-xs text-white/80 mb-1">Account Number</p>
+              <p className="text-base font-semibold text-white">123465789654</p>
             </div>
           </div>
-        </div>
-
-        {/* KYC Prompt */}
-        <div className="bg-card rounded-xl p-6 shadow-sm">
-          <p className="text-sm text-foreground mb-4">
-            Your KYC is pending. Complete it using the vKYC option below.
-          </p>
-          <Button
-            onClick={() => navigate("/kyc-permissions")}
-            className="w-full h-12 text-base font-semibold rounded-xl"
-            variant="solid"
-          >
-            Complete vKYC
-          </Button>
         </div>
 
         {/* Bank Representative Connection Box */}
