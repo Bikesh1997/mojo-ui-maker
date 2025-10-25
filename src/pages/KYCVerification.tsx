@@ -1,20 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Video, CheckCircle2 } from "lucide-react";
+import { ChevronLeft, CheckCircle2 } from "lucide-react";
 import auLogo from "@/assets/au-logo.png";
 
 const KYCVerification = () => {
   const navigate = useNavigate();
-  const [verificationStarted, setVerificationStarted] = useState(false);
   const [verificationComplete, setVerificationComplete] = useState(false);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleStartVerification = () => {
-    setVerificationStarted(true);
-    // Simulate video KYC process
-    setTimeout(() => {
+  useEffect(() => {
+    // Automatically start camera when component mounts
+    startCamera();
+
+    // Simulate verification completion after some time
+    const timer = setTimeout(() => {
       setVerificationComplete(true);
-    }, 3000);
+      stopCamera();
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+      stopCamera();
+    };
+  }, []);
+
+  const startCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: 'user' },
+        audio: false 
+      });
+      setCameraStream(stream);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (error) {
+      console.error("Error accessing camera:", error);
+    }
+  };
+
+  const stopCamera = () => {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(track => track.stop());
+      setCameraStream(null);
+    }
   };
 
   const handleComplete = () => {
@@ -32,41 +63,51 @@ const KYCVerification = () => {
       </header>
 
       {/* Content */}
-      <div className="px-6 py-6 flex flex-col items-center justify-center min-h-[calc(100vh-72px)]">
-        {!verificationStarted ? (
-          <div className="text-center max-w-md">
-            <div className="w-24 h-24 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center">
-              <Video className="w-12 h-12 text-primary" />
+      <div className="px-6 py-6 flex flex-col min-h-[calc(100vh-72px)]">
+        {!verificationComplete ? (
+          <div className="flex-1 flex flex-col items-center justify-center">
+            {/* PAN Card Message */}
+            <div className="mb-4 p-4 bg-primary/5 border border-primary/20 rounded-2xl max-w-md w-full">
+              <p className="text-sm text-primary font-medium text-center">
+                Please keep your PAN Card with you.
+              </p>
             </div>
-            <h1 className="text-2xl font-bold text-foreground mb-3">
-              Ready for Video KYC?
-            </h1>
-            <p className="text-sm text-muted-foreground mb-8">
-              Please ensure you're in a well-lit area and have your PAN card ready. The verification will take approximately 2-3 minutes.
-            </p>
-            <Button
-              onClick={handleStartVerification}
-              className="w-full h-12 text-base font-semibold"
-              variant="default"
-            >
-              Start Verification
-            </Button>
-          </div>
-        ) : !verificationComplete ? (
-          <div className="text-center max-w-md">
-            <div className="w-64 h-64 mx-auto mb-6 bg-muted rounded-3xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 animate-pulse" />
-              <Video className="w-20 h-20 text-primary relative z-10" />
+
+            {/* Camera View */}
+            <div className="w-full max-w-md">
+              <div className="relative w-full aspect-[3/4] bg-black rounded-3xl overflow-hidden shadow-card">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  playsInline
+                  muted
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Overlay Frame */}
+                <div className="absolute inset-0 border-4 border-primary/30 rounded-3xl pointer-events-none" />
+                
+                {/* Instructions Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                  <p className="text-white text-sm text-center">
+                    Position your face within the frame
+                  </p>
+                </div>
+              </div>
             </div>
-            <h2 className="text-xl font-bold text-foreground mb-2">
-              Verification in Progress
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Please follow the instructions from our representative...
-            </p>
+
+            {/* Verification Status */}
+            <div className="mt-6 text-center">
+              <h2 className="text-xl font-bold text-foreground mb-2">
+                Verification in Progress
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Please follow the instructions on screen...
+              </p>
+            </div>
           </div>
         ) : (
-          <div className="text-center max-w-md">
+          <div className="flex-1 flex flex-col items-center justify-center text-center max-w-md mx-auto">
             <div className="w-24 h-24 mx-auto mb-6 bg-success/10 rounded-full flex items-center justify-center">
               <CheckCircle2 className="w-12 h-12 text-success" />
             </div>
@@ -78,7 +119,7 @@ const KYCVerification = () => {
             </p>
             <Button
               onClick={handleComplete}
-              className="w-full h-12 text-base font-semibold"
+              className="w-full h-12 text-base font-semibold rounded-xl"
               variant="secondary"
             >
               Continue to Dashboard
