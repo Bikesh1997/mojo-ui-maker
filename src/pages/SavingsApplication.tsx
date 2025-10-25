@@ -599,19 +599,28 @@ const SavingsApplication = () => {
                       </Label>
                     </div>
                     
+                    {/* Address field - blank initially, populated after OTP verification */}
                     <div className={cn(
-                      "rounded-xl p-4 text-sm text-foreground",
-                      !otpVerified && "opacity-50"
-                    )} style={{ backgroundColor: '#6C256C1F' }}>
-                      Cerebrum IT Park, Office No 4C, 3rd Floor, B-3 Tower, Kalyani Nagar, Pune, Maharashtra 411014
+                      "bg-white rounded-xl p-4 text-sm shadow-sm border border-input min-h-[60px] flex items-center transition-all duration-300",
+                      !otpVerified && "opacity-50",
+                      otpVerified && "animate-fade-in"
+                    )}>
+                      {otpVerified ? (
+                        <span className="text-foreground">
+                          Cerebrum IT Park, Office No 4C, 3rd Floor, B-3 Tower, Kalyani Nagar, Pune, Maharashtra 411014
+                        </span>
+                      ) : (
+                        <span className="text-muted-foreground italic">
+                          Address will appear after OTP verification
+                        </span>
+                      )}
                     </div>
                     
-                    <div className={cn(
-                      "mt-3 rounded-xl p-4 text-sm",
-                      !otpVerified && "opacity-50"
-                    )} style={{ backgroundColor: '#E8F5E9', color: '#2E7D32' }}>
-                      Your checkbook and debit card will be sent to the current address
-                    </div>
+                    {otpVerified && (
+                      <div className="mt-3 rounded-xl p-4 text-sm bg-[#E8F5E9] text-[#2E7D32] animate-fade-in">
+                        Your checkbook and debit card will be sent to the current address
+                      </div>
+                    )}
                   </div>
                 </FormItem>
               )}
