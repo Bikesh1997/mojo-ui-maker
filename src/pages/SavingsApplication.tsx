@@ -316,7 +316,7 @@ const SavingsApplication = () => {
                           type="tel"
                           placeholder="Aadhaar linked mobile"
                           className={cn(
-                            "rounded-xl transition-colors pl-12",
+                            "rounded-xl transition-colors pl-12 bg-white",
                             getValidationClassName("mobile", true)
                           )}
                           maxLength={10}
@@ -387,7 +387,7 @@ const SavingsApplication = () => {
                         type="email"
                         placeholder="Email Address"
                         className={cn(
-                          "rounded-xl transition-colors",
+                          "rounded-xl transition-colors bg-white",
                           getValidationClassName("email", true)
                         )}
                         onChange={(e) => {
@@ -412,7 +412,7 @@ const SavingsApplication = () => {
                         type="text"
                         placeholder="Permanent account number (PAN)"
                         className={cn(
-                          "rounded-xl transition-colors",
+                          "rounded-xl transition-colors bg-white",
                           getValidationClassName("pan", true)
                         )}
                         maxLength={10}
@@ -515,7 +515,7 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="enter OTP"
                             className={cn(
-                              "rounded-xl pr-10 transition-colors",
+                              "rounded-xl pr-10 transition-colors bg-white",
                               field.value?.length === 6 && !otpVerified && "border-[#00CC66]",
                               otpVerified && "border-input"
                             )}
@@ -681,7 +681,7 @@ const SavingsApplication = () => {
                 <Input
                   type="text"
                   placeholder="Search company"
-                  className="rounded-xl pl-10 pr-10"
+                  className="rounded-xl pl-10 pr-10 bg-white"
                   value={companySearch}
                   onChange={(e) => setCompanySearch(e.target.value)}
                   onKeyDown={handleCompanyKeyDown}
@@ -738,7 +738,7 @@ const SavingsApplication = () => {
                         type="text"
                         placeholder="Mothers Full Name"
                         className={cn(
-                          "rounded-xl transition-colors",
+                          "rounded-xl transition-colors bg-white",
                           getValidationClassName("motherName", true)
                         )}
                         onChange={(e) => {
