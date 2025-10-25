@@ -19,7 +19,9 @@ import {
   Bus, 
   Hotel, 
   Plane, 
-  CheckCircle 
+  CheckCircle,
+  CreditCard,
+  Wallet
 } from "lucide-react";
 import auLogo from "@/assets/au-logo.png";
 import savingsIllustration from "@/assets/savings-illustration.png";
@@ -61,6 +63,14 @@ const Index = () => {
               <SelectItem value="loan">Personal Loan</SelectItem>
             </SelectContent>
           </Select>
+        </div>
+
+        {/* Top Feature Cards */}
+        <div className="mb-6">
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Savings Account" icon={Wallet} />
+            <FeatureCard title="Credit Card" icon={CreditCard} />
+          </div>
         </div>
 
         {/* Two Cards in Row */}
