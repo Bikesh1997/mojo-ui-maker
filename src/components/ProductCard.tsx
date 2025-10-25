@@ -7,9 +7,19 @@ interface ProductCardProps {
   illustration: string;
   gradient: string;
   applyRoute?: string;
+  applyButtonText?: string;
+  knowMoreButtonText?: string;
 }
 
-export const ProductCard = ({ title, description, illustration, gradient, applyRoute }: ProductCardProps) => {
+export const ProductCard = ({ 
+  title, 
+  description, 
+  illustration, 
+  gradient, 
+  applyRoute,
+  applyButtonText = "Apply",
+  knowMoreButtonText = "Know More"
+}: ProductCardProps) => {
   const navigate = useNavigate();
 
   const handleApply = () => {
@@ -25,8 +35,8 @@ export const ProductCard = ({ title, description, illustration, gradient, applyR
           <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
           <p className="text-white/90 text-sm mb-6">{description}</p>
           <div className="flex gap-3">
-            <Button variant="solid" size="sm" onClick={handleApply}>Apply</Button>
-            <Button variant="outline" size="sm" className="text-white border-white">Know More</Button>
+            <Button variant="solid" size="sm" onClick={handleApply}>{applyButtonText}</Button>
+            <Button variant="outline" size="sm" className="text-white border-white">{knowMoreButtonText}</Button>
           </div>
         </div>
         <div className="w-24 h-24 flex-shrink-0">

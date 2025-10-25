@@ -73,8 +73,9 @@ const Index = () => {
             title="Savings Account"
             description="Earn up to 8.00% with monthly interest credits"
             illustration={savingsIllustration}
-            gradient="bg-gradient-secondary"
+            gradient="bg-gradient-feature"
             applyRoute="/savings-application"
+            applyButtonText="Open Account"
           />
           
           <ProductCard

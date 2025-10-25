@@ -45,6 +45,7 @@ All colors MUST be HSL.
     --gradient-secondary: linear-gradient(135deg, hsl(28 100% 65%), hsl(35 100% 55%));
     --gradient-accent: linear-gradient(135deg, hsl(205 100% 50%), hsl(210 100% 60%));
     --gradient-success: linear-gradient(135deg, hsl(168 60% 55%), hsl(175 60% 65%));
+    --gradient-feature: linear-gradient(260deg, rgba(234, 103, 28, 0.12) 9.28%, rgba(108, 37, 108, 0.12) 94.59%);
 
     --shadow-card: 0 4px 24px -4px hsl(295 65% 35% / 0.08);
     --shadow-card-hover: 0 8px 32px -4px hsl(295 65% 35% / 0.12);
