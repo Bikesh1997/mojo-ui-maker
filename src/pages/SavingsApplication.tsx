@@ -40,9 +40,9 @@ const baseFormSchema = z.object({
     .regex(mobileRegex, "Please enter a valid 10-digit mobile number"),
   dob: z.date()
     .refine((date) => {
-      const minAge = subYears(new Date(), 28);
+      const minAge = subYears(new Date(), 18);
       return date <= minAge;
-    }, "You must be at least 28 years old to apply"),
+    }, "You must be at least 18 years old to proceed"),
   email: z.string()
     .regex(emailRegex, "Please enter a valid email address"),
   pan: z.string()
