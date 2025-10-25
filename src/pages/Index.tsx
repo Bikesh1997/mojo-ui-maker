@@ -8,6 +8,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ProductCard } from "@/components/ProductCard";
+import { FeatureCard } from "@/components/FeatureCard";
+import { 
+  Building2, 
+  Landmark, 
+  Car, 
+  FileText, 
+  Gift, 
+  Smartphone, 
+  Bus, 
+  Hotel, 
+  Plane, 
+  CheckCircle 
+} from "lucide-react";
 import auLogo from "@/assets/au-logo.png";
 import savingsIllustration from "@/assets/savings-illustration.png";
 import creditCardIllustration from "@/assets/creditcard-illustration.png";
@@ -51,22 +64,38 @@ const Index = () => {
         </div>
 
         {/* Two Cards in Row */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <div 
-            className="p-4 rounded-2xl shadow-sm"
-            style={{ background: 'linear-gradient(260deg, rgba(234, 103, 28, 0.12) 9.28%, rgba(108, 37, 108, 0.12) 94.59%)' }}
-          >
-            <h3 className="text-sm font-semibold text-foreground mb-1">Quick Apply</h3>
-            <p className="text-xs text-muted-foreground">Instant account opening</p>
-          </div>
-          <div 
-            className="p-4 rounded-2xl shadow-sm"
-            style={{ background: 'linear-gradient(260deg, rgba(234, 103, 28, 0.12) 9.28%, rgba(108, 37, 108, 0.12) 94.59%)' }}
-          >
-            <h3 className="text-sm font-semibold text-foreground mb-1">Zero Balance</h3>
-            <p className="text-xs text-muted-foreground">No minimum balance</p>
+        <div className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">Quick Services</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Quick Apply" icon={CheckCircle} />
+            <FeatureCard title="Zero Balance" icon={Landmark} />
           </div>
         </div>
+
+        {/* Additional Feature Cards */}
+        <div className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">Banking Services</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Current Account" icon={Building2} />
+            <FeatureCard title="Fixed Deposit" icon={Landmark} />
+            <FeatureCard title="Car Loan" icon={Car} />
+            <FeatureCard title="Bill Pay" icon={FileText} />
+          </div>
+        </div>
+
+        {/* More Services */}
+        <div className="mb-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">More Services</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <FeatureCard title="Offers" icon={Gift} />
+            <FeatureCard title="Recharge" icon={Smartphone} />
+            <FeatureCard title="Bus" icon={Bus} />
+            <FeatureCard title="Hotels" icon={Hotel} />
+            <FeatureCard title="Flights" icon={Plane} />
+            <FeatureCard title="Apply Now" icon={CheckCircle} />
+          </div>
+        </div>
+
 
         {/* Product Cards */}
         <div className="space-y-4">
