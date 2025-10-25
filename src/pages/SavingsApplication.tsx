@@ -357,8 +357,37 @@ const SavingsApplication = () => {
                           field.value.length < 9 ? "numeric" : "text"
                         }
                         onChange={(e) => {
-                          const value = e.target.value.toUpperCase();
-                          field.onChange(value);
+                          const currentValue = e.target.value.toUpperCase();
+                          const position = currentValue.length - 1;
+                          let validatedValue = field.value || "";
+                          
+                          // Validate based on PAN format: AAAAA9999A
+                          if (currentValue.length > validatedValue.length) {
+                            // User is adding a character
+                            const newChar = currentValue[position];
+                            
+                            if (position < 5) {
+                              // First 5 characters: alphabets only
+                              if (/[A-Z]/.test(newChar)) {
+                                validatedValue = currentValue;
+                              }
+                            } else if (position >= 5 && position < 9) {
+                              // Next 4 characters: digits only
+                              if (/[0-9]/.test(newChar)) {
+                                validatedValue = currentValue;
+                              }
+                            } else if (position === 9) {
+                              // Last character: alphabet only
+                              if (/[A-Z]/.test(newChar)) {
+                                validatedValue = currentValue;
+                              }
+                            }
+                          } else {
+                            // User is deleting
+                            validatedValue = currentValue;
+                          }
+                          
+                          field.onChange(validatedValue);
                           form.trigger("pan");
                         }}
                       />
