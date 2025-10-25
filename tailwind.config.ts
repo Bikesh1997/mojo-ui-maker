@@ -61,7 +61,6 @@ export default {
         'gradient-secondary': 'var(--gradient-secondary)',
         'gradient-accent': 'var(--gradient-accent)',
         'gradient-success': 'var(--gradient-success)',
-        'gradient-feature': 'var(--gradient-feature)',
       },
       borderRadius: {
         lg: "var(--radius)",
