@@ -176,26 +176,26 @@ const SavingsApplication = () => {
     // While typing (real-time)
     if (isTyping && value) {
       if (fieldState.error) {
-        return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-background";
+        return "border-[#FF0000] focus-visible:ring-[#FF0000]";
       }
-      // Show white background and green border while typing valid input
+      // Show green border while typing valid input
       if (!fieldState.error && fieldState.isDirty) {
-        return "border-[#00CC66] focus-visible:ring-[#00CC66] bg-white";
+        return "border-[#00CC66] focus-visible:ring-[#00CC66]";
       }
     }
     
     // Show red for errors
     if (fieldState.error && fieldState.isDirty) {
-      return "border-[#FF0000] focus-visible:ring-[#FF0000] bg-background";
+      return "border-[#FF0000] focus-visible:ring-[#FF0000]";
     }
     
-    // White background for correctly filled fields
+    // Default border for correctly filled fields
     if (value && !fieldState.error) {
-      return "bg-white border-input";
+      return "border-input";
     }
     
-    // Default neutral background
-    return "border-input bg-background";
+    // Default state
+    return "border-input";
   };
 
   return (
@@ -425,10 +425,10 @@ const SavingsApplication = () => {
                             className={cn(
                               "rounded-xl pr-10 transition-colors",
                               field.value && "text-black",
-                              field.value?.length === 6 && !otpError && !otpVerified && "border-[#00CC66] bg-white",
-                              field.value && field.value.length < 6 && "border-[#FF0000] bg-white",
+                              field.value?.length === 6 && !otpError && !otpVerified && "border-[#00CC66]",
+                              field.value && field.value.length < 6 && "border-[#FF0000]",
                               otpError && "border-[#FF0000]",
-                              otpVerified && "bg-white border-input"
+                              otpVerified && "border-input"
                             )}
                             maxLength={6}
                             autoComplete="one-time-code"
