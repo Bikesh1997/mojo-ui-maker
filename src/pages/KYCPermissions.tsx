@@ -7,7 +7,7 @@ import { usePermissions } from "@/hooks/usePermissions";
 
 const KYCPermissions = () => {
   const navigate = useNavigate();
-  const { permissions, checking, allPermissionsGranted, allChecksComplete } = usePermissions();
+  const { permissions, togglePermission, allPermissionsGranted } = usePermissions();
 
   const handleStartKYC = () => {
     if (allPermissionsGranted) {
@@ -42,24 +42,27 @@ const KYCPermissions = () => {
                 icon={Wifi}
                 label="Internet Speed Test"
                 granted={permissions.internet}
-                isChecking={checking.internet}
+                isChecking={false}
+                onToggle={() => togglePermission('internet')}
               />
               <PermissionItem
                 icon={Camera}
                 label="Camera Access"
                 granted={permissions.camera}
-                isChecking={checking.camera}
+                isChecking={false}
+                onToggle={() => togglePermission('camera')}
               />
               <PermissionItem
                 icon={Mic}
                 label="Microphone Access"
                 granted={permissions.microphone}
-                isChecking={checking.microphone}
+                isChecking={false}
+                onToggle={() => togglePermission('microphone')}
               />
             </div>
           </div>
 
-          {!allPermissionsGranted && allChecksComplete && (
+          {!allPermissionsGranted && (
             <div className="mt-4 p-4 bg-destructive/10 border border-destructive/20 rounded-2xl">
               <p className="text-sm text-destructive">
                 Please grant all required permissions to proceed with Video KYC verification.
@@ -72,16 +75,11 @@ const KYCPermissions = () => {
         <div className="pt-6">
           <Button
             onClick={handleStartKYC}
-            disabled={!allPermissionsGranted || !allChecksComplete}
+            disabled={!allPermissionsGranted}
             className="w-full h-12 text-base font-semibold rounded-xl"
             variant="secondary"
           >
-            {allChecksComplete 
-              ? allPermissionsGranted 
-                ? "Start Video KYC" 
-                : "Grant Permissions"
-              : "Checking Permissions..."
-            }
+            {allPermissionsGranted ? "Start Video KYC" : "Grant Permissions"}
           </Button>
         </div>
       </div>
