@@ -71,21 +71,66 @@ const Index = () => {
         {/* All Service Cards - One Per Row */}
         <div className="space-y-3">
           <FeatureCard 
-            title="Savings Account" 
+            title="Savings Account"
+            description="Start saving for your future today."
             icon={Wallet}
             onApply={() => navigate("/savings-application")}
           />
-          <FeatureCard title="Credit Card" icon={CreditCard} />
-          <FeatureCard title="Current Account" icon={Building2} />
-          <FeatureCard title="Fixed Deposit" icon={Landmark} />
-          <FeatureCard title="Car Loan" icon={Car} />
-          <FeatureCard title="Bill Pay" icon={FileText} />
-          <FeatureCard title="Offers" icon={Gift} />
-          <FeatureCard title="Recharge" icon={Smartphone} />
-          <FeatureCard title="Bus" icon={Bus} />
-          <FeatureCard title="Hotels" icon={Hotel} />
-          <FeatureCard title="Flights" icon={Plane} />
-          <FeatureCard title="Apply Now" icon={CheckCircle} />
+          <FeatureCard 
+            title="Credit Card"
+            description="Get flexible credit with rewards and cashback."
+            icon={CreditCard}
+          />
+          <FeatureCard 
+            title="Current Account"
+            description="Manage daily transactions efficiently."
+            icon={Building2}
+          />
+          <FeatureCard 
+            title="Fixed Deposit"
+            description="Earn higher interest on secure investments."
+            icon={Landmark}
+          />
+          <FeatureCard 
+            title="Car Loan"
+            description="Drive your dream car with easy EMI options."
+            icon={Car}
+          />
+          <FeatureCard 
+            title="Bill Pay"
+            description="Pay utilities and bills in a few taps."
+            icon={FileText}
+          />
+          <FeatureCard 
+            title="Offers"
+            description="Exclusive deals and discounts for you."
+            icon={Gift}
+          />
+          <FeatureCard 
+            title="Recharge"
+            description="Top-up mobile, DTH, or data plans instantly."
+            icon={Smartphone}
+          />
+          <FeatureCard 
+            title="Bus"
+            description="Book bus tickets conveniently."
+            icon={Bus}
+          />
+          <FeatureCard 
+            title="Hotels"
+            description="Reserve your stay at the best rates."
+            icon={Hotel}
+          />
+          <FeatureCard 
+            title="Flights"
+            description="Book flights quickly and securely."
+            icon={Plane}
+          />
+          <FeatureCard 
+            title="Apply Now"
+            description="Open an account and start banking immediately."
+            icon={CheckCircle}
+          />
         </div>
       </div>
 
