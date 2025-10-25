@@ -74,7 +74,7 @@ const AccountDetails = () => {
             <img 
               src={bankRepresentative} 
               alt="Bank Representative" 
-              className="w-32 h-32 rounded-full border-4 border-primary object-cover"
+              className="w-24 h-24 rounded-full border-4 border-primary object-cover"
             />
           </div>
         </div>
