@@ -474,7 +474,7 @@ const SavingsApplication = () => {
                           inputMode="numeric"
                           placeholder="12 digit Aadhaar number"
                           className={cn(
-                            "rounded-xl pr-10 transition-colors",
+                            "rounded-xl pr-10 transition-colors bg-white",
                             getValidationClassName("aadhaar", true)
                           )}
                           maxLength={12}
@@ -712,7 +712,7 @@ const SavingsApplication = () => {
                         type="text"
                         placeholder="Annual Income in Rupees"
                         className={cn(
-                          "rounded-xl transition-colors",
+                          "rounded-xl transition-colors bg-white",
                           getValidationClassName("annualIncome", true)
                         )}
                         onChange={(e) => {
