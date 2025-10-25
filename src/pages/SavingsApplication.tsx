@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -82,20 +82,47 @@ const baseFormSchema = z.object({
   path: ["nomineeFullName"],
 });
 
+const STORAGE_KEY = "savings_application_form_data";
+const STORAGE_STATE_KEY = "savings_application_state";
+
 const SavingsApplication = () => {
   const navigate = useNavigate();
-  const [showOtpField, setShowOtpField] = useState(false);
-  const [otpTimer, setOtpTimer] = useState(60);
-  const [companySearch, setCompanySearch] = useState("");
-  const [otpVerified, setOtpVerified] = useState(false);
+  
+  // Load saved state from localStorage
+  const loadSavedState = () => {
+    try {
+      const savedState = localStorage.getItem(STORAGE_STATE_KEY);
+      return savedState ? JSON.parse(savedState) : {};
+    } catch (error) {
+      console.error("Error loading saved state:", error);
+      return {};
+    }
+  };
+
+  const savedState = loadSavedState();
+  const [showOtpField, setShowOtpField] = useState(savedState.showOtpField || false);
+  const [otpTimer, setOtpTimer] = useState(savedState.otpTimer || 60);
+  const [companySearch, setCompanySearch] = useState(savedState.companySearch || "");
+  const [otpVerified, setOtpVerified] = useState(savedState.otpVerified || false);
   const [otpError, setOtpError] = useState(false);
-  const [enteredOtp, setEnteredOtp] = useState("");
+  const [enteredOtp, setEnteredOtp] = useState(savedState.enteredOtp || "");
   const [calendarOpen, setCalendarOpen] = useState(false);
 
-  const form = useForm<z.infer<typeof baseFormSchema>>({
-    resolver: zodResolver(baseFormSchema),
-    mode: "onBlur",
-    defaultValues: {
+  // Load saved form data from localStorage
+  const loadSavedFormData = () => {
+    try {
+      const savedData = localStorage.getItem(STORAGE_KEY);
+      if (savedData) {
+        const parsed = JSON.parse(savedData);
+        // Convert date strings back to Date objects
+        if (parsed.dob) parsed.dob = new Date(parsed.dob);
+        if (parsed.nomineeDob) parsed.nomineeDob = new Date(parsed.nomineeDob);
+        return parsed;
+      }
+    } catch (error) {
+      console.error("Error loading saved form data:", error);
+    }
+    return {
       mobile: "",
       email: "",
       pan: "",
@@ -116,8 +143,42 @@ const SavingsApplication = () => {
       nomineeEmail: "",
       nomineeAddressSame: true,
       acceptTerms: false,
-    },
+    };
+  };
+
+  const form = useForm<z.infer<typeof baseFormSchema>>({
+    resolver: zodResolver(baseFormSchema),
+    mode: "onBlur",
+    defaultValues: loadSavedFormData(),
   });
+
+  // Save form data to localStorage whenever form values change
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+      } catch (error) {
+        console.error("Error saving form data:", error);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
+
+  // Save component state to localStorage
+  useEffect(() => {
+    try {
+      const stateToSave = {
+        showOtpField,
+        otpTimer,
+        companySearch,
+        otpVerified,
+        enteredOtp,
+      };
+      localStorage.setItem(STORAGE_STATE_KEY, JSON.stringify(stateToSave));
+    } catch (error) {
+      console.error("Error saving component state:", error);
+    }
+  }, [showOtpField, otpTimer, companySearch, otpVerified, enteredOtp]);
 
   const handleGetOtp = () => {
     setShowOtpField(true);
@@ -165,6 +226,13 @@ const SavingsApplication = () => {
 
   const onSubmit = (data: z.infer<typeof baseFormSchema>) => {
     console.log("Form submitted:", data);
+    // Clear localStorage after successful submission
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_STATE_KEY);
+    } catch (error) {
+      console.error("Error clearing saved data:", error);
+    }
     // Navigate to Account Details page after successful submission
     navigate("/account-details");
   };
