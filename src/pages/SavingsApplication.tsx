@@ -607,9 +607,9 @@ const SavingsApplication = () => {
                     </div>
                     
                     <div className={cn(
-                      "mt-3 text-sm text-muted-foreground",
+                      "mt-3 rounded-xl p-4 text-sm",
                       !otpVerified && "opacity-50"
-                    )}>
+                    )} style={{ backgroundColor: '#E8F5E9', color: '#2E7D32' }}>
                       Your checkbook and debit card will be sent to the current address
                     </div>
                   </div>
