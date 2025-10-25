@@ -135,8 +135,8 @@ const SavingsApplication = () => {
   };
 
   const handleVerifyOtp = () => {
-    // Simulate OTP verification - in real app, this would be an API call
-    if (enteredOtp === "123456") { // Mock valid OTP
+    // Accept any 6-digit OTP
+    if (enteredOtp.length === 6 && /^\d{6}$/.test(enteredOtp)) {
       setOtpVerified(true);
       setOtpError(false);
     } else {
@@ -452,11 +452,9 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="enter OTP"
                             className={cn(
-                              "rounded-xl pr-10 transition-colors",
+                              "rounded-xl pr-10 transition-colors bg-white",
                               field.value && "text-black",
-                              field.value?.length === 6 && !otpError && !otpVerified && "border-[#00CC66]",
-                              field.value && field.value.length < 6 && "border-[#FF0000]",
-                              otpError && "border-[#FF0000]",
+                              field.value?.length === 6 && !otpVerified && "border-[#00CC66]",
                               otpVerified && "border-input"
                             )}
                             maxLength={6}
@@ -468,6 +466,14 @@ const SavingsApplication = () => {
                               setEnteredOtp(value);
                               setOtpError(false);
                               setOtpVerified(false);
+                              
+                              // Auto-verify when 6 digits are entered
+                              if (value.length === 6) {
+                                setTimeout(() => {
+                                  setOtpVerified(true);
+                                  setOtpError(false);
+                                }, 300);
+                              }
                             }}
                           />
                           {otpVerified && (
@@ -477,11 +483,6 @@ const SavingsApplication = () => {
                           )}
                         </div>
                       </FormControl>
-                      {otpError && (
-                        <p className="text-xs text-[#D32F2F] animate-in fade-in slide-in-from-top-1 duration-200">
-                          Invalid OTP, please try again
-                        </p>
-                      )}
                       <div className="flex justify-between items-center mt-2">
                         <span className="text-xs text-muted-foreground">Timer: {formatTime(otpTimer)}</span>
                         <button type="button" className="text-xs text-secondary font-medium" disabled={otpTimer > 0}>
