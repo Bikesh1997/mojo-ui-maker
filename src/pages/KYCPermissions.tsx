@@ -1,62 +1,13 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Check, Wifi, Camera, Mic } from "lucide-react";
-import { cn } from "@/lib/utils";
-import auLogo from "@/assets/au-logo.png";
+import { Wifi, Camera, Mic } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
+import PermissionItem from "@/components/PermissionItem";
+import { usePermissions } from "@/hooks/usePermissions";
 
 const KYCPermissions = () => {
   const navigate = useNavigate();
-  const [permissions, setPermissions] = useState({
-    internet: false,
-    camera: false,
-    microphone: false,
-  });
-  const [checking, setChecking] = useState({
-    internet: true,
-    camera: true,
-    microphone: true,
-  });
-
-  useEffect(() => {
-    // Simulate permission checks
-    const checkPermissions = async () => {
-      // Check internet speed
-      setTimeout(() => {
-        setPermissions((prev) => ({ ...prev, internet: true }));
-        setChecking((prev) => ({ ...prev, internet: false }));
-      }, 1000);
-
-      // Check camera access
-      setTimeout(async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-          stream.getTracks().forEach(track => track.stop());
-          setPermissions((prev) => ({ ...prev, camera: true }));
-        } catch (error) {
-          setPermissions((prev) => ({ ...prev, camera: false }));
-        }
-        setChecking((prev) => ({ ...prev, camera: false }));
-      }, 1500);
-
-      // Check microphone access
-      setTimeout(async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          stream.getTracks().forEach(track => track.stop());
-          setPermissions((prev) => ({ ...prev, microphone: true }));
-        } catch (error) {
-          setPermissions((prev) => ({ ...prev, microphone: false }));
-        }
-        setChecking((prev) => ({ ...prev, microphone: false }));
-      }, 2000);
-    };
-
-    checkPermissions();
-  }, []);
-
-  const allPermissionsGranted = permissions.internet && permissions.camera && permissions.microphone;
-  const allChecksComplete = !checking.internet && !checking.camera && !checking.microphone;
+  const { permissions, checking, allPermissionsGranted, allChecksComplete } = usePermissions();
 
   const handleStartKYC = () => {
     if (allPermissionsGranted) {
@@ -64,53 +15,9 @@ const KYCPermissions = () => {
     }
   };
 
-  const PermissionItem = ({ 
-    icon: Icon, 
-    label, 
-    granted, 
-    isChecking 
-  }: { 
-    icon: any; 
-    label: string; 
-    granted: boolean; 
-    isChecking: boolean;
-  }) => (
-    <div className="flex items-center justify-between py-4 border-b border-border last:border-0">
-      <div className="flex items-center gap-3">
-        <div className={cn(
-          "w-10 h-10 rounded-full flex items-center justify-center",
-          granted ? "bg-success/10" : "bg-muted"
-        )}>
-          <Icon className={cn(
-            "w-5 h-5",
-            granted ? "text-success" : "text-muted-foreground"
-          )} />
-        </div>
-        <span className="text-sm font-medium text-foreground">{label}</span>
-      </div>
-      {isChecking ? (
-        <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-      ) : granted ? (
-        <div className="w-6 h-6 rounded-full bg-success flex items-center justify-center">
-          <Check className="w-4 h-4 text-white" />
-        </div>
-      ) : (
-        <div className="w-6 h-6 rounded-full border-2 border-destructive flex items-center justify-center">
-          <span className="text-destructive text-xs">✕</span>
-        </div>
-      )}
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-primary px-6 py-4 flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="text-white">
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <img src={auLogo} alt="AU Small Finance Bank" className="h-8" />
-      </header>
+      <PageHeader />
 
       {/* Content */}
       <div className="px-6 py-6 flex flex-col min-h-[calc(100vh-72px)]">
@@ -166,7 +73,7 @@ const KYCPermissions = () => {
           <Button
             onClick={handleStartKYC}
             disabled={!allPermissionsGranted || !allChecksComplete}
-            className="w-full h-12 text-base font-semibold"
+            className="w-full h-12 text-base font-semibold rounded-xl"
             variant="secondary"
           >
             {allChecksComplete 
