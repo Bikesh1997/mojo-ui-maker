@@ -5,10 +5,9 @@ interface FeatureCardProps {
   title: string;
   icon: LucideIcon;
   onApply?: () => void;
-  onKnowMore?: () => void;
 }
 
-export const FeatureCard = ({ title, icon: Icon, onApply, onKnowMore }: FeatureCardProps) => {
+export const FeatureCard = ({ title, icon: Icon, onApply }: FeatureCardProps) => {
   return (
     <div 
       className="p-4 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md"
@@ -19,24 +18,13 @@ export const FeatureCard = ({ title, icon: Icon, onApply, onKnowMore }: FeatureC
           <Icon className="w-6 h-6 text-primary" />
         </div>
         <h3 className="text-sm font-semibold text-foreground text-center">{title}</h3>
-        <div className="flex gap-2 w-full">
-          <Button 
-            variant="secondary" 
-            size="sm" 
-            className="flex-1 h-8 text-xs rounded-lg"
-            onClick={onApply}
-          >
-            Apply
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="flex-1 h-8 text-xs rounded-lg bg-white/40 hover:bg-white/60 border-primary/20"
-            onClick={onKnowMore}
-          >
-            Know More
-          </Button>
-        </div>
+        <Button 
+          className="w-full h-8 text-xs rounded-lg bg-white hover:bg-white/90 shadow-sm hover:shadow-md transition-all duration-200"
+          style={{ color: '#000000' }}
+          onClick={onApply}
+        >
+          Open Account
+        </Button>
       </div>
     </div>
   );
