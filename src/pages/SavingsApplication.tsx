@@ -317,7 +317,6 @@ const SavingsApplication = () => {
                           placeholder="Aadhaar linked mobile"
                           className={cn(
                             "rounded-xl transition-colors pl-12",
-                            field.value && "text-black",
                             getValidationClassName("mobile", true)
                           )}
                           maxLength={10}
@@ -347,7 +346,6 @@ const SavingsApplication = () => {
                             className={cn(
                               "w-full h-10 rounded-xl justify-start text-left font-normal px-3 transition-colors border-input bg-white hover:bg-white hover:text-foreground",
                               !field.value && "text-muted-foreground",
-                              field.value && "text-black",
                               getValidationClassName("dob", false)
                             )}
                           >
@@ -390,7 +388,6 @@ const SavingsApplication = () => {
                         placeholder="Email Address"
                         className={cn(
                           "rounded-xl transition-colors",
-                          field.value && "text-black",
                           getValidationClassName("email", true)
                         )}
                         onChange={(e) => {
@@ -416,7 +413,6 @@ const SavingsApplication = () => {
                         placeholder="Permanent account number (PAN)"
                         className={cn(
                           "rounded-xl transition-colors",
-                          field.value && "text-black",
                           getValidationClassName("pan", true)
                         )}
                         maxLength={10}
@@ -479,7 +475,6 @@ const SavingsApplication = () => {
                           placeholder="12 digit Aadhaar number"
                           className={cn(
                             "rounded-xl pr-10 transition-colors",
-                            field.value && "text-black",
                             getValidationClassName("aadhaar", true)
                           )}
                           maxLength={12}
@@ -520,8 +515,7 @@ const SavingsApplication = () => {
                             type="text"
                             placeholder="enter OTP"
                             className={cn(
-                              "rounded-xl pr-10 transition-colors bg-white",
-                              field.value && "text-black",
+                              "rounded-xl pr-10 transition-colors",
                               field.value?.length === 6 && !otpVerified && "border-[#00CC66]",
                               otpVerified && "border-input"
                             )}
@@ -719,7 +713,6 @@ const SavingsApplication = () => {
                         placeholder="Annual Income in Rupees"
                         className={cn(
                           "rounded-xl transition-colors",
-                          field.value && "text-black",
                           getValidationClassName("annualIncome", true)
                         )}
                         onChange={(e) => {
@@ -746,7 +739,6 @@ const SavingsApplication = () => {
                         placeholder="Mothers Full Name"
                         className={cn(
                           "rounded-xl transition-colors",
-                          field.value && "text-black",
                           getValidationClassName("motherName", true)
                         )}
                         onChange={(e) => {
