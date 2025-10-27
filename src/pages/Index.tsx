@@ -80,6 +80,7 @@ const Index = () => {
             title="Credit Card"
             description="Get flexible credit with rewards and cashback."
             icon={CreditCard}
+            buttonText="Get Card"
           />
           <FeatureCard 
             title="Current Account"

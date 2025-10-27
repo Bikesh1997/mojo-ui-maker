@@ -6,9 +6,10 @@ interface FeatureCardProps {
   description: string;
   icon: LucideIcon;
   onApply?: () => void;
+  buttonText?: string;
 }
 
-export const FeatureCard = ({ title, description, icon: Icon, onApply }: FeatureCardProps) => {
+export const FeatureCard = ({ title, description, icon: Icon, onApply, buttonText = "Open Account" }: FeatureCardProps) => {
   return (
     <div 
       className="p-6 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md"
@@ -28,7 +29,7 @@ export const FeatureCard = ({ title, description, icon: Icon, onApply }: Feature
           className="flex-1 min-w-0 h-9 text-xs rounded-lg bg-white hover:bg-white/90 text-black shadow-sm hover:shadow-md transition-all duration-200"
           onClick={onApply}
         >
-          Open Account
+          {buttonText}
         </Button>
         <Button 
           variant="outline"
