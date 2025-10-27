@@ -349,7 +349,7 @@ const SavingsApplication = () => {
                               getValidationClassName("dob", false)
                             )}
                           >
-                            {field.value ? format(field.value, "dd MMM yyyy") : "Date of Birth"}
+                            {field.value ? format(field.value, "dd/MM/yyyy") : "Date of Birth (DD/MM/YYYY)"}
                             <Calendar className="ml-auto h-5 w-5 opacity-50" />
                           </Button>
                         </FormControl>
