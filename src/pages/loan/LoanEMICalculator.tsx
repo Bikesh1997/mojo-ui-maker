@@ -74,7 +74,7 @@ export const LoanEMICalculator = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-foreground">Loan Tenure</label>
-                <span className="text-lg font-bold text-purple-600">{tenure} months</span>
+                <span className="text-lg font-bold text-secondary">{tenure} months</span>
               </div>
               <Slider
                 value={[tenure]}
