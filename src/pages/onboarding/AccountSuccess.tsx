@@ -56,7 +56,7 @@ export const AccountSuccess = () => {
         </div>
 
         {/* Account Card */}
-        <div className="p-6 rounded-2xl bg-[#6D266D] from-primary/10 via-card to-secondary/10 border border-border shadow-xl space-y-4">
+        <div className="p-6 rounded-2xl bg-secondary from-primary/10 via-card to-secondary/10 border border-border shadow-xl space-y-4">
           <div className="flex items-center gap-3 pb-4 border-b border-border">
             <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
               <span className="text-xl font-bold text-white">AU</span>

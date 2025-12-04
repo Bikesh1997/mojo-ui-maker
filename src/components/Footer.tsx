@@ -9,11 +9,11 @@ export const Footer = () => {
     <p
       className="flex flex-wrap items-center justify-center gap-1 text-sm sm:text-base leading-tight"
     >
-      <span className="text-gray-800">Powered by</span>
+      <span className="text-foreground">Powered by</span>
       <img src={logoTechbulls} alt="Techbulls" className="h-4" />
     </p>
 
-    <p className="text-[10px] sm:text-xs text-gray-600">
+    <p className="text-[10px] sm:text-xs text-muted-foreground">
       Copyright &copy; 2025
     </p>
   </div>
