@@ -36,6 +36,7 @@ import { DisbursalProcessing } from "./pages/loan/DisbursalProcessing";
 import { DisbursalSuccess } from "./pages/loan/DisbursalSuccess";
 import { LoanDashboard } from "./pages/loan/LoanDashboard";
 import NotFound from "./pages/NotFound";
+import {Footer} from  './components/Footer'
 
 const queryClient = new QueryClient();
 const basename = import.meta.env.VITE_BASE_PATH || "/";
@@ -218,11 +219,17 @@ const App = () => (
               }
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+<<<<<<< Updated upstream
               <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
             <Footer />
           </div>
+=======
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+            <Footer />
+>>>>>>> Stashed changes
         </BrowserRouter>
       </OnboardingProvider>
     </TooltipProvider>
