@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AU 0101 App UX Feedback Report</title>
+    <style>
+        @page {
+            margin: 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            border-bottom: 4px solid #5279f0;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #5279f0;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .content {
+            margin-top: 30px;
+        }
+        
+        .feedback-item {
+            margin-bottom: 24px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .feedback-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: #5279f0;
+            border-radius: 50%;
+        }
+        
+        .feedback-item p {
+            color: #444;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .accent-line {
+            height: 2px;
+            background: linear-gradient(to right, #5279f0, transparent);
+            margin: 30px 0;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        .print-button {
+            background: #5279f0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .print-button:hover {
+            background: #3d5fcc;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">Print / Save as PDF</button>
+    
+    <div class="header">
+        <h1>AU 0101 App UX Feedback Report</h1>
+        <p class="subtitle">User Experience Analysis and Recommendations</p>
+    </div>
+    
+    <div class="accent-line"></div>
+    
+    <div class="content">
+        <div class="feedback-item">
+            <p>The app name "AU 0101" may create some confusion; it appears like a beta or test version.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>The initial animation sequence with three slides feels longer than necessary; the "Proceed" button adds limited value.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>The SMS Secure Code feature opens the mobile SMS app and requires disabling Wi-Fi to use mobile data. It also asks for permission to send SMS and takes noticeable time (around 5 seconds) to verify. This can be taken up later in the login flow.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>There's a ~30-second wait time during mobile number verification without any visible loader or progress indicator.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>On the home page, when selecting "Open Savings," the mobile number is pre-filled, so the placeholder for the Aadhaar-linked number isn't shown. However, it reappears when PAN or Aadhaar verification fails.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>During PAN entry, the keyboard collapses after typing alphabets, requiring the user to tap again to continue entering numbers and alphabets alternately.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>OTP is not getting auto-populated after it's received.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>The landing page becomes available only after completing multiple steps; it would improve usability if accessible earlier.</p>
+        </div>
+        
+        <div class="feedback-item">
+            <p>The app automatically selects the "AU Value Account," asking for an initial ₹10,000 deposit and displaying "You can access your money within 2 hours of completing the KYC." This may create trust issues as users generally expect instant account details (account number, card info, etc.) after opening the account.</p>
+        </div>
+    </div>
+    
+    <div class="accent-line"></div>
+    
+    <div class="footer">
+        <p>Generated on: <script>document.write(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }))</script></p>
+    </div>
+</body>
+</html>

@@ -1,143 +1,78 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ProductCard } from "@/components/ProductCard";
-import { FeatureCard } from "@/components/FeatureCard";
-import { 
-  Building2, 
-  Landmark, 
-  Car, 
-  FileText, 
-  Gift, 
-  Smartphone, 
-  Bus, 
-  Hotel, 
-  Plane, 
-  CheckCircle,
-  CreditCard,
-  Wallet
-} from "lucide-react";
-import auLogo from "@/assets/au-logo.png";
-import savingsIllustration from "@/assets/savings-illustration.png";
-import creditCardIllustration from "@/assets/creditcard-illustration.png";
-import loanIllustration from "@/assets/loan-illustration.png";
-import lovableIllustration from "@/assets/lovable-illustration.png";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [selectedService, setSelectedService] = useState("savings");
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2">
-          <img src={auLogo} alt="AU Small Finance Bank" className="h-10" />
-        </div>
-        <Button variant="secondary" size="sm">Login/Register</Button>
-      </header>
-
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       {/* Hero Section */}
-      <section className="bg-gradient-primary px-6 py-8 text-white">
-        <h1 className="text-2xl font-bold mb-2">Welcome to AU Finance</h1>
-        <p className="text-white/90 text-sm">
-          Your journey to smart banking starts here, quick setup, secure and safe.
-        </p>
-      </section>
+      <div className="container mx-auto px-6 py-20">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          <div className="space-y-4 animate-fade-in">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+              Welcome to{" "}
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                IDFC FIRST Bank
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              Experience seamless banking with instant loan approvals, digital account opening, and secure verification.
+            </p>
+          </div>
 
-      {/* Service Selector */}
-      <div className="px-6 py-6">
-        <div className="mb-6">
-          <label className="text-sm text-foreground mb-2 block">I am looking for</label>
-          <Select value={selectedService} onValueChange={setSelectedService}>
-            <SelectTrigger className="w-full bg-card border-border">
-              <SelectValue placeholder="Select a service" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="savings">Savings Account</SelectItem>
-              <SelectItem value="credit">Credit Card</SelectItem>
-              <SelectItem value="loan">Personal Loan</SelectItem>
-            </SelectContent>
-          </Select>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+            <Button
+              size="lg"
+              onClick={() => navigate("/loan/mobile")}
+              className="w-full sm:w-auto min-w-[200px]"
+            >
+              Apply for Personal Loan
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => navigate("/onboarding/mobile")}
+              className="w-full sm:w-auto min-w-[200px]"
+            >
+              Open Bank Account
+            </Button>
+          </div>
+
+          {/* Feature Grid */}
+          <div className="grid md:grid-cols-3 gap-6 pt-16">
+            <div className="p-6 rounded-2xl bg-card border border-border hover:shadow-lg transition-all">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Instant Approval</h3>
+              <p className="text-sm text-muted-foreground">Get your loan approved in minutes with our AI-powered system</p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-card border border-border hover:shadow-lg transition-all">
+              <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Secure Verification</h3>
+              <p className="text-sm text-muted-foreground">Bank-grade security with Aadhaar and PAN verification</p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-card border border-border hover:shadow-lg transition-all">
+              <div className="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Flexible EMI</h3>
+              <p className="text-sm text-muted-foreground">Choose loan amount and tenure that fits your budget</p>
+            </div>
+          </div>
         </div>
-
-        {/* All Service Cards - One Per Row */}
-        <div className="space-y-3">
-          <FeatureCard 
-            title="Savings Account"
-            description="Start saving for your future today."
-            icon={Wallet}
-            onApply={() => navigate("/savings-application")}
-          />
-          <FeatureCard 
-            title="Credit Card"
-            description="Get flexible credit with rewards and cashback."
-            icon={CreditCard}
-            buttonText="Get Card"
-          />
-          <FeatureCard 
-            title="Current Account"
-            description="Manage daily transactions efficiently."
-            icon={Building2}
-          />
-          <FeatureCard 
-            title="Fixed Deposit"
-            description="Earn higher interest on secure investments."
-            icon={Landmark}
-          />
-          <FeatureCard 
-            title="Car Loan"
-            description="Drive your dream car with easy EMI options."
-            icon={Car}
-          />
-          <FeatureCard 
-            title="Bill Pay"
-            description="Pay utilities and bills in a few taps."
-            icon={FileText}
-          />
-          <FeatureCard 
-            title="Offers"
-            description="Exclusive deals and discounts for you."
-            icon={Gift}
-          />
-          <FeatureCard 
-            title="Recharge"
-            description="Top-up mobile, DTH, or data plans instantly."
-            icon={Smartphone}
-          />
-          <FeatureCard 
-            title="Bus"
-            description="Book bus tickets conveniently."
-            icon={Bus}
-          />
-          <FeatureCard 
-            title="Hotels"
-            description="Reserve your stay at the best rates."
-            icon={Hotel}
-          />
-          <FeatureCard 
-            title="Flights"
-            description="Book flights quickly and securely."
-            icon={Plane}
-          />
-          <FeatureCard 
-            title="Apply Now"
-            description="Open an account and start banking immediately."
-            icon={CheckCircle}
-          />
-        </div>
-      </div>
-
-      {/* Bottom Indicator */}
-      <div className="flex justify-center py-8">
-        <div className="w-32 h-1 bg-muted rounded-full"></div>
       </div>
     </div>
   );
