@@ -15,7 +15,7 @@ const Landing = () => {
           {/* <Landmark className="w-8 h-8 text-primary" /> */}
           {/* <span className="font-bold text-xl">AU Small Finance Bank</span> */}
           <div className="flex items-center gap-2">
-            <img src={logo} alt="AU Small Finance Bank" className="h-14" />
+            <img src={logo} alt="AU Small Finance Bank" className="h-14 mix-blend-multiply" />
           </div>{" "}
         </div>
       </header>

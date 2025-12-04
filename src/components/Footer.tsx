@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 const Footer = () => {
   return (
     <footer className="w-full py-6 px-4 bg-background border-t border-border">
@@ -9,32 +8,8 @@ const Footer = () => {
         </p>
         <p className="text-xs text-muted-foreground">Copyright © 2025</p>
       </div>
-=======
-import logoTechbulls from "../../public/logo-techbulls.svg";
-
-export const Footer = () => {
-  return (
-    <footer className="w-full bg-[#f7f3f7] py-[8px] px-[8px] sm:py-[10px] sm:px-[10px] border-t border-gray-200">
-      <div
-    className="max-w-5xl mx-auto px-4 py-3 sm:py-4 flex flex-col items-center justify-center gap-1"
-  >
-    <p
-      className="flex flex-wrap items-center justify-center gap-1 text-sm sm:text-base leading-tight"
-    >
-      <span className="text-gray-800">Powered by</span>
-      <img src={logoTechbulls} alt="Techbulls" className="h-4" />
-    </p>
-
-    <p className="text-[10px] sm:text-xs text-gray-600">
-      Copyright &copy; 2025
-    </p>
-  </div>
->>>>>>> Stashed changes
     </footer>
   );
 };
 
-<<<<<<< Updated upstream
 export { Footer };
-=======
->>>>>>> Stashed changes
