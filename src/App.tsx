@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { OnboardingProvider } from "./contexts/OnboardingContext";
 import { ProgressBar } from "./components/ProgressBar";
 import { LoanProgressBar } from "./components/LoanProgressBar";
+import { Footer } from "./components/Footer";
 import Landing from "./pages/Landing";
 import { MobileVerification } from "./pages/onboarding/MobileVerification";
 import { AadhaarVerification } from "./pages/onboarding/AadhaarVerification";
@@ -45,8 +46,10 @@ const App = () => (
       <Toaster />
       <OnboardingProvider>
         <BrowserRouter basename={basename}>
-          <Routes>
-            <Route path="/" element={<Landing />} />
+          <div className="min-h-screen flex flex-col">
+            <div className="flex-1">
+              <Routes>
+                <Route path="/" element={<Landing />} />
             <Route
               path="/onboarding/*"
               element={
@@ -215,8 +218,11 @@ const App = () => (
               }
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
         </BrowserRouter>
       </OnboardingProvider>
     </TooltipProvider>
